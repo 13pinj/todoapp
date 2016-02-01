@@ -61,6 +61,11 @@ func retrieveSession(client *http.Client) Session {
 
 func TestCookieStoring(t *testing.T) {
 
+	sess := FromContext(nil)
+	if sess != nil {
+		t.Error("FromContext должна возвращать нулевую сессию для нулевого контекста.")
+	}
+
 	client := &http.Client{}
 
 	sess1 := retrieveSession(client)
