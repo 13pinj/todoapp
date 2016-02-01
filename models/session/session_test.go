@@ -33,10 +33,11 @@ func TestMain(m *testing.M) {
 	// Довольно костыльное решение, но Gin не предоставляет нормального
 	// функционала для тестирования.
 
+	gin.SetMode(gin.TestMode)
 	hf := func(c *gin.Context) {
 		session = FromContext(c)
 	}
-	r := gin.Default()
+	r := gin.New()
 	r.GET("/", hf)
 	r.Run(listenAddr)
 }
