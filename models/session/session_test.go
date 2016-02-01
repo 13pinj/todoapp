@@ -136,6 +136,7 @@ func TestDataStoring(t *testing.T) {
 		assertIntKey(t, "Пустая сессия не должна содержать значений int.", sess, key, 0)
 		sess.SetInt(key, val)
 	}
+	sess.SetInt("", 89)
 
 	sess = retrieveSession(client)
 	if sess == nil {
@@ -145,6 +146,7 @@ func TestDataStoring(t *testing.T) {
 		assertIntKey(t, "Сессия должна сохранять значения int.", sess, key, val)
 	}
 	assertIntKey(t, "Сессия должна возвращать 0 для незаданных значений.", sess, missingInt, 0)
+	assertIntKey(t, "Значения с пустыми ключами не должны сохраняться.", sess, "", 0)
 
 	// Обнуление куки.
 	client.Jar = nil
