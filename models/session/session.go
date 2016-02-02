@@ -25,10 +25,6 @@ type Session interface {
 	// SetString(key string, val string)
 }
 
-// Получает сессию из контекста gin.
-// Если данные о сессии не содержатся в куки запроса, создает новую сессию.
-// Иначе возвращает созданную ранее.
-
 var mapSession = make(map[string]*imSession)
 
 type imSession struct {
@@ -77,6 +73,9 @@ func hasSession(c *gin.Context) (string, bool) {
 	return st.Value, true
 }
 
+// Получает сессию из контекста gin.
+// Если данные о сессии не содержатся в куки запроса, создает новую сессию.
+// Иначе возвращает созданную ранее.
 func FromContext(c *gin.Context) Session {
 	if c == nil {
 		return nil
