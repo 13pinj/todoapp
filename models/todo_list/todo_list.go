@@ -2,10 +2,27 @@ package todo_list
 
 import "github.com/13pinj/todoapp/models/todo"
 
+// TodoList - структура списка дел
 type TodoList struct {
+	ID uint
+	// Заголовок списка
+	Title string
+	// Список todo
+	Todos []*todo.Todo
+}
+
+// Представление TodoList в памяти
+type imTodoList struct {
 	ID    uint
 	Title string
-	Todos []*todo.Todo
+}
+
+// Хранилище списков дел внутри памяти.
+var imStorage = make(map[uint]*imTodoList)
+
+// Функция форматирования внутреннего представления TodoList во внешее представление.
+func (l *imTodoList) format() *TodoList {
+	return nil
 }
 
 // New создает новый экземпляр TodoList, но не сохраняет его.
@@ -58,11 +75,11 @@ func (l *TodoList) Add(lbl string) error {
 }
 
 // Undone возвращает список незавершенных дел.
-func (l *TodoList) Undone() []*TodoList {
+func (l *TodoList) Undone() []*todo.Todo {
 	return nil
 }
 
 // Done возвращает список завершенных дел.
-func (l *TodoList) Done() []*TodoList {
+func (l *TodoList) Done() []*todo.Todo {
 	return nil
 }

@@ -1,6 +1,10 @@
 package todo_list
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/13pinj/todoapp/models/todo"
+)
 
 func TestNew(t *testing.T) {
 	title1 := "First todolist"
@@ -163,9 +167,19 @@ func TestTodoList_Destroy(t *testing.T) {
 
 	id1 := list1.ID
 	id2 := list2.ID
+	list1.Add("First")
+	list1.Add("Second")
+	todos1 := list1.Todos
 	list1.Destroy()
 	if _, ok := Find(id1); ok {
 		t.Error("Структура уничтоженная с помощью Destroy(), не должна быть найдена в базе")
+	}
+
+	for _, t1 := range todos1 {
+		if _, ok := todo.Find(t1.ID); ok {
+			t.Error("Destroy() должно уничтожать все todo списка.")
+			break
+		}
 	}
 
 	if _, ok := Find(id2); !ok {
@@ -212,8 +226,6 @@ func TestTodoList_LenDoneUndone(t *testing.T) {
 
 	list2.Add("Task 1")
 	list2.Add("Task 2")
-	list2.Todos[1].Done = true
-	list2.Todos[1].Save()
 
 	if list1.Len() != 3 {
 		t.Errorf("Len() должно возвращать длину списка. Ожидалось %v, получено %v.", 3, list1.Len())
@@ -225,14 +237,60 @@ func TestTodoList_LenDoneUndone(t *testing.T) {
 	if list1.LenDone() != 1 {
 		t.Errorf("LenDone() должно возвращать длину списка. Ожидалось %v, получено %v.", 1, list1.LenDone())
 	}
-	if list2.LenDone() != 1 {
-		t.Errorf("LenDone() должно возвращать длину списка. Ожидалось %v, получено %v.", 1, list2.LenDone())
+	if list2.LenDone() != 0 {
+		t.Errorf("LenDone() должно возвращать длину списка. Ожидалось %v, получено %v.", 0, list2.LenDone())
 	}
 
 	if list1.LenUndone() != 2 {
 		t.Errorf("LenUndone() должно возвращать длину списка. Ожидалось %v, получено %v.", 2, list1.LenUndone())
 	}
-	if list2.LenUndone() != 1 {
-		t.Errorf("LenUndone() должно возвращать длину списка. Ожидалось %v, получено %v.", 1, list2.LenUndone())
+	if list2.LenUndone() != 2 {
+		t.Errorf("LenUndone() должно возвращать длину списка. Ожидалось %v, получено %v.", 2, list2.LenUndone())
+	}
+
+	done1 := list1.Done()
+	if len(done1) != 1 {
+		t.Fatalf("Done() должен возвращать корректное значение. Ожидалась длина %v, получено %v.", 1, len(done1))
+	}
+
+	done2 := list2.Done()
+	if len(done2) != 0 {
+		t.Fatalf("Done() должен возвращать корректное значение. Ожидалась длина %v, получено %v.", 0, len(done1))
+	}
+
+	undone1 := list1.Undone()
+	if len(undone1) != 2 {
+		t.Fatalf("Undone() должен возвращать корректное значение. Ожидалась длина %v, получено %v.", 2, len(undone1))
+	}
+
+	undone2 := list2.Undone()
+	if len(undone2) != 2 {
+		t.Fatalf("Undone() должен возвращать корректное значение. Ожидалась длина %v, получено %v.", 2, len(undone2))
+	}
+}
+
+func TestTodoList_Add(t *testing.T) {
+	title1 := "First todolist"
+	list1 := New(title1)
+
+	if list1 == nil {
+		t.FailNow()
+	}
+
+	if err := list1.Add("First todo"); err == nil {
+		t.Error("Add() не должен добавлять задания к несохраненному списку.")
+	}
+
+	list1.Save()
+
+	if err := list1.Add("First todo"); err != nil {
+		t.Error("Add() не должен отвечать ошибкой на корректное добавление.")
+	}
+	if list1.Len() != 1 || list1.LenUndone() != 1 {
+		t.Error("Дело должно быть добавлено в список (Len() или LenUndone() вернули некорретные значения)")
+	}
+
+	if err := list1.Add(""); err == nil {
+		t.Error("Add() не должен добавлять задания с пустым текстом.")
 	}
 }

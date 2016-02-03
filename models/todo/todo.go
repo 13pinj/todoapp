@@ -9,6 +9,8 @@ type Todo struct {
 	Done bool
 	// Краткое описание дела.
 	Label string
+	// ID списка дел, которому принадлежит Todo
+	TodoListID uint
 }
 
 var st = make(map[uint]*Todo)
