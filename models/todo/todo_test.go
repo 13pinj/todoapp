@@ -89,7 +89,7 @@ func TestTodo_Save(t *testing.T) {
 	}
 
 	todo2_0.Label = ""
-	if err := todo2_0.Save(); err != nil {
+	if err := todo2_0.Save(); err == nil {
 		t.Error("Сохранение созданного дело с пустым текстом не должно быть допущено")
 	}
 	todo2_1, _ := Find(todo2_0.ID)
