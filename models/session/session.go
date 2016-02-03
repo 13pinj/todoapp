@@ -8,6 +8,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Session - интерфейс структуры сессии.
+// Все реализации сессий в проекте будут удовлетворять этому интерфейсу.
 type Session interface {
 	ID() string
 
@@ -73,7 +75,7 @@ func hasSession(c *gin.Context) (string, bool) {
 	return st.Value, true
 }
 
-// Получает сессию из контекста gin.
+// FromContext получает сессию из контекста gin.
 // Если данные о сессии не содержатся в куки запроса, создает новую сессию.
 // Иначе возвращает созданную ранее.
 func FromContext(c *gin.Context) Session {
@@ -85,8 +87,6 @@ func FromContext(c *gin.Context) Session {
 		ses, ok := mapSession[key]
 		if ok {
 			return ses
-		} else {
-			return sessionInit(c)
 		}
 	}
 	return sessionInit(c)

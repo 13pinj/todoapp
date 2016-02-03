@@ -14,7 +14,7 @@ import (
 var (
 	listenAddr    = ":8080"
 	connectAddr   = "http://127.0.0.1:8080/"
-	connectUrl, _ = url.Parse(connectAddr)
+	connectURL, _ = url.Parse(connectAddr)
 )
 
 var (
@@ -55,7 +55,7 @@ func retrieveSession(client *http.Client) Session {
 		panic(err)
 	}
 	resp.Body.Close()
-	client.Jar.SetCookies(connectUrl, resp.Cookies())
+	client.Jar.SetCookies(connectURL, resp.Cookies())
 
 	return session
 }
@@ -162,7 +162,7 @@ func TestDataStoring(t *testing.T) {
 	if sess == nil {
 		t.Fatal("Сессия не должна быть nil.")
 	}
-	for key, _ := range ints {
+	for key := range ints {
 		assertIntKey(t, "Сессия не должна возвращать значения чужой сессии.", sess, key, 0)
 	}
 	assertIntKey(t, "Сессия должна сохранять значения int.", sess, missingInt, 12)
