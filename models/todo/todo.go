@@ -27,9 +27,10 @@ func New(l string) *Todo {
 
 func stCopy(t *Todo) *Todo {
 	return &Todo{
-		ID:    t.ID,
-		Done:  t.Done,
-		Label: t.Label,
+		ID:         t.ID,
+		Done:       t.Done,
+		Label:      t.Label,
+		TodoListID: t.TodoListID,
 	}
 }
 
@@ -42,6 +43,16 @@ func Find(id uint) (*Todo, bool) {
 		return stCopy(record), true
 	}
 	return nil, false
+}
+
+func FindBuList(listid uint) []*Todo {
+	slice := []*Todo{}
+	for _, v := range st {
+		if v.TodoListID == listid {
+			slice = append(slice, v)
+		}
+	}
+	return slice
 }
 
 // Save сохраняет структуру в базу. Если структура не была прежде сохранена,
@@ -60,6 +71,7 @@ func (t *Todo) Save() error {
 	} else {
 		st[t.ID].Done = t.Done
 		st[t.ID].Label = t.Label
+		st[t.ID].TodoListID = t.TodoListID
 	}
 	return nil
 }
