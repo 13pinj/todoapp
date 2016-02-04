@@ -65,6 +65,12 @@ func FromContext(c *gin.Context) (*User, bool) {
 	return nil, false
 }
 
+// AutoLogin запишет факт авторизации в сессию пользователя.
+// Он перезапишет старые данные об авторизации, если таковые имеются.
+func (u *User) AutoLogin(c *gin.Context) {
+
+}
+
 // Destroy стирает данные о пользователе из базы данных.
 func (u *User) Destroy() {
 
