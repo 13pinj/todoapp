@@ -45,7 +45,7 @@ func Find(id uint) (*Todo, bool) {
 	return nil, false
 }
 
-func FindBuList(listid uint) []*Todo {
+func FindByList(listid uint) []*Todo {
 	slice := []*Todo{}
 	for _, v := range st {
 		if v.TodoListID == listid {

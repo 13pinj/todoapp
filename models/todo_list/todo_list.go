@@ -30,7 +30,7 @@ func (l *imTodoList) format() *TodoList {
 	return &TodoList{
 		ID:    l.ID,
 		Title: l.Title,
-		Todos: todo.FindBuList(l.ID),
+		Todos: todo.FindByList(l.ID),
 	}
 }
 
