@@ -34,8 +34,8 @@ func (u *User) zip() *imUser {
 }
 
 // validate проверяет корректность всех полей модели.
-func (u *User) validate() bool {
-	return false
+func (u *User) validate() error {
+	return nil
 }
 
 // Register добавляет нового пользователя в базу, и возвращает его структуру,

@@ -46,14 +46,14 @@ func TestTodoList_Save(t *testing.T) {
 		t.Error("Сохранение валидного списка не должно вызывать ошибок")
 	}
 	if err := empty.Save(); err == nil {
-		t.Error("Сохранение списка с пустым текстом не должно быть допущено")
+		t.Error("Сохранение списка с пустым заголовком не должно быть допущено")
 	}
 
 	if list1.ID == 0 || list2.ID == 0 {
-		t.Error("После сохранения Todo должен быть присвоен ID")
+		t.Error("После сохранения списку должен быть присвоен ID")
 	}
 	if empty.ID != 0 {
-		t.Error("Сохранение с ошибкой не должно изменять ID структуры")
+		t.Error("Сохранение с ошибкой не должно изменять ID списка")
 	}
 
 	if t.Failed() {
@@ -77,7 +77,7 @@ func TestTodoList_Save(t *testing.T) {
 	}
 
 	if list1_0.Title != title1 || list2_0.Title != title2 {
-		t.Error("Поле Title должно успешно сохраняться")
+		t.Error("Поле заголовка должно успешно сохраняться")
 	}
 
 	if t.Failed() {
@@ -86,7 +86,7 @@ func TestTodoList_Save(t *testing.T) {
 
 	list2_0.Title = ""
 	if err := list2_0.Save(); err == nil {
-		t.Error("Сохранение созданного списка с пустым заголовком не должно быть допущено")
+		t.Error("Сохранение прежде сохраненного списка с пустым заголовком не должно быть допущено")
 	}
 	list2_1, _ := Find(list2_0.ID)
 	if list2_1.Title != title2 {
@@ -106,9 +106,8 @@ func TestFind(t *testing.T) {
 
 	list1 := New(title1)
 	list2 := New(title2)
-	empty := New("")
 
-	if list1 == nil || list2 == nil || empty == nil {
+	if list1 == nil || list2 == nil {
 		t.FailNow()
 	}
 	if err := list1.Save(); err != nil {
@@ -219,6 +218,9 @@ func TestTodoList_LenDoneUndone(t *testing.T) {
 	}
 
 	list1.Add("Task 1")
+	if len(list1.Todos) < 1 {
+		t.FailNow()
+	}
 	list1.Todos[0].Done = true
 	list1.Todos[0].Save()
 	list1.Add("Task 2")
