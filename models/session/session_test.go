@@ -3,43 +3,24 @@ package session
 import (
 	"net/http"
 	"net/http/cookiejar"
-	"net/url"
 	"os"
-	"runtime"
 	"testing"
 
+	"github.com/13pinj/todoapp/core/apptesting"
 	"github.com/gin-gonic/gin"
 )
 
 var (
-	listenAddr    = ":8080"
-	connectAddr   = "http://127.0.0.1:8080/"
-	connectURL, _ = url.Parse(connectAddr)
-)
-
-var (
+	server  *apptesting.Server
 	session Session
 )
 
 func TestMain(m *testing.M) {
-	// Чтобы тестирования не началось случайно до того, как запустится сервер Gin.
-	runtime.GOMAXPROCS(1)
-	// Тесты запускаются в отдельной от сервера горутине.
-	// Эта горутина стартует, только когда заблокируется текущая.
-	// А именно, когда заблокируется сервер Gin в ожидании подключений.
-	go func() {
-		os.Exit(m.Run())
-	}()
-	// Довольно костыльное решение, но Gin не предоставляет нормального
-	// функционала для тестирования.
-
-	gin.SetMode(gin.TestMode)
 	hf := func(c *gin.Context) {
 		session = FromContext(c)
 	}
-	r := gin.New()
-	r.GET("/", hf)
-	r.Run(listenAddr)
+	server = apptesting.NewServer(hf)
+	os.Exit(m.Run())
 }
 
 // Отправляет с локального клиента запрос на сервер и возвращает
@@ -50,12 +31,12 @@ func retrieveSession(client *http.Client) Session {
 		client.Jar = jar
 	}
 
-	resp, err := client.Get(connectAddr)
+	resp, err := client.Get(server.URL.String())
 	if err != nil {
 		panic(err)
 	}
 	resp.Body.Close()
-	client.Jar.SetCookies(connectURL, resp.Cookies())
+	client.Jar.SetCookies(server.URL, resp.Cookies())
 
 	return session
 }
