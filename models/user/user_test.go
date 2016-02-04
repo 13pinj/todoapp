@@ -19,7 +19,12 @@ var (
 
 	credForServer *cred
 	loginServer   *apptesting.Server
+
+	userForServer   *User
+	autoLoginServer *apptesting.Server
+
 	fromCtxServer *apptesting.Server
+	logoutServer  *apptesting.Server
 )
 
 func TestMain(m *testing.M) {
@@ -30,11 +35,24 @@ func TestMain(m *testing.M) {
 	}
 	loginServer = apptesting.NewServer(hf)
 
+	// Тестовый сервер для вызова User.AutoLogin
+	userForServer = &User{}
+	hf = func(c *gin.Context) {
+		userForServer.AutoLogin(c)
+	}
+	autoLoginServer = apptesting.NewServer(hf)
+
 	// Тестовый сервер для вызова FromContext
 	hf = func(c *gin.Context) {
 		lastUser, lastOk = FromContext(c)
 	}
 	fromCtxServer = apptesting.NewServer(hf)
+
+	// Тестовый сервер для вызова Logout
+	hf = func(c *gin.Context) {
+		Logout(c)
+	}
+	logoutServer = apptesting.NewServer(hf)
 
 	os.Exit(m.Run())
 }
@@ -49,9 +67,28 @@ func loginWith(client *apptesting.Client, c *cred) {
 	resp.Body.Close()
 }
 
+// Функция выполнения подключения к autoLoginServer
+func autoLoginWith(client *apptesting.Client, u *User) {
+	userForServer = u
+	resp, err := client.Get(autoLoginServer.URL.String())
+	if err != nil {
+		panic(err)
+	}
+	resp.Body.Close()
+}
+
 // Функция подключения к fromCtxServer
 func runFromContext(client *apptesting.Client) {
 	resp, err := client.Get(fromCtxServer.URL.String())
+	if err != nil {
+		panic(err)
+	}
+	resp.Body.Close()
+}
+
+// Функция подключения к logoutServer
+func runLogout(client *apptesting.Client) {
+	resp, err := client.Get(logoutServer.URL.String())
 	if err != nil {
 		panic(err)
 	}
@@ -194,5 +231,128 @@ func TestLoginFromContext(t *testing.T) {
 	}
 	if lastUser.Name != cr.name {
 		t.Errorf("Login() должно возвращать правильную структуру после перезаписи входа. Ожидалось %q, получено %q.", cr.name, lastUser.Name)
+	}
+}
+
+// С помощью клиента client выполняет регистрация и вход пользователя с данными
+// cr на серверах. В случае ошибок в работе Register, Login или FromContext
+// прекращает тест.
+func prepareTest(t *testing.T, client *apptesting.Client, cr *cred) *User {
+	// Проверка Register
+	u, err := Register(cr.name, cr.pass)
+	if u == nil || err != nil {
+		t.Fatal("Register должно работать корректно")
+	}
+
+	// Проверка Login
+	loginWith(client, cr)
+	if !lastOk || lastUser == nil || lastUser.Name != cr.name {
+		t.Fatal("Login() и FromContext() должны работать корректно")
+	}
+
+	// Проверка FromContext
+	runFromContext(client)
+	if !lastOk || lastUser == nil || lastUser.Name != cr.name {
+		t.Fatal("Login() и FromContext() должны работать корректно")
+	}
+
+	return u
+}
+
+func TestLogout(t *testing.T) {
+	// Подготовить данные для тестовых входов
+	cr := cred{"logout_tester", "qwerty1234567"}
+	client := apptesting.NewClient()
+	prepareTest(t, client, &cr)
+
+	// Вызов Logout после успешного входа
+	runLogout(client)
+	runFromContext(client)
+	if lastOk || lastUser != nil {
+		t.Error("Logout() должно стирать данные об аутентификации пользователя")
+	}
+
+	// Вызов Logout с пустыми куками
+	client.ClearCookie()
+	t.Log("Logout() должно корректно реагировать на отсутствие аутентификации")
+	runLogout(client)
+	runFromContext(client)
+	if lastOk || lastUser != nil {
+		t.Error("Logout() должно корректно реагировать на отсутствие аутентификации")
+	}
+}
+
+func TestUser_AutoLogin(t *testing.T) {
+	// Подготовить данные для тестовых входов
+	cr := cred{"autologin_tester", "qwerty1234567"}
+	client := apptesting.NewClient()
+	u := prepareTest(t, client, &cr)
+
+	// Запуск AutoLogin на "чистом" клиенте
+	client.ClearCookie()
+	autoLoginWith(client, u)
+	runFromContext(client)
+	if !lastOk {
+		t.Fatalf("AutoLogin() должно выполнять успешный вход (FromContext() вернуло false)")
+	}
+	if lastUser == nil {
+		t.Fatalf("AutoLogin() должно выполнять успешный вход (FromContext() вернуло nil, true)")
+	}
+	if lastUser.Name != cr.name {
+		t.Errorf("AutoLogin() должно выполнять вход с правильными данными. Ожидалось %q, получено %q.", cr.name, lastUser.Name)
+	}
+
+	// Запуск AutoLogin на "занятом" клиенте
+	autoLoginWith(client, u)
+	runFromContext(client)
+	if !lastOk {
+		t.Fatalf("AutoLogin() должно выполнять успешный вход с перезаписью (FromContext() вернуло false)")
+	}
+	if lastUser == nil {
+		t.Fatalf("AutoLogin() должно выполнять успешный вход с перезаписью (FromContext() вернуло nil, true)")
+	}
+	if lastUser.Name != cr.name {
+		t.Errorf("AutoLogin() должно выполнять вход с перезаписью с правильными данными. Ожидалось %q, получено %q.", cr.name, lastUser.Name)
+	}
+}
+
+func TestUser_Destroy(t *testing.T) {
+	// Подготовить данные для тестовых входов
+	cr := cred{"destroy_tester", "qwerty1234567"}
+	client := apptesting.NewClient()
+	u := prepareTest(t, client, &cr)
+
+	// Проверка FromContext после удаления пользователя
+	u.Destroy()
+	runFromContext(client)
+	if lastOk || lastUser != nil {
+		t.Error("Destroy() должно делать данные об аутентификации пользователя недоступными")
+	}
+
+	// Проверка регистрации после удаления
+	cr.pass = "New Password"
+	client.ClearCookie()
+	u, err := Register(cr.name, cr.pass)
+	if u == nil || err != nil {
+		t.Fatal("Перерегистрация удаленного пользователя должна проходить успешно")
+	}
+
+	// Проверка входа после удаления
+	u.Destroy()
+	loginWith(client, &cr)
+	if lastOk || lastUser != nil {
+		t.Error("Destroy() должно делать вход невозможным")
+	}
+
+	// Проверка AutoLogin после удаления
+	client.ClearCookie()
+	u, err = Register(cr.name, cr.pass)
+	if u == nil || err != nil {
+		t.Fatal("Перерегистрация удаленного пользователя должна проходить успешно")
+	}
+	u.Destroy()
+	autoLoginWith(client, u)
+	if lastOk || lastUser != nil {
+		t.Error("Destroy() должно делать AutoLogin невозможным")
 	}
 }
