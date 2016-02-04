@@ -52,15 +52,20 @@ func NewServer(fn gin.HandlerFunc) *Server {
 	return &Server{URL: serverURL}
 }
 
+// Client - тестовый клиент, основанный на http.Client, но автоматически
+// сохраняющий все куки, полученные с сервера.
 type Client struct {
 	*http.Client
 }
 
+// NewClient инициализует клиент с пустым CookieJar
 func NewClient() *Client {
 	jar, _ := cookiejar.New(nil)
 	return &Client{&http.Client{Jar: jar}}
 }
 
+// Get ведет себя как http.Client.Get, но в случае успешного запроса
+// сохраняет все полученные куки.
 func (c *Client) Get(rawURL string) (resp *http.Response, err error) {
 	resp, err = c.Client.Get(rawURL)
 	if err != nil {
@@ -74,6 +79,7 @@ func (c *Client) Get(rawURL string) (resp *http.Response, err error) {
 	return
 }
 
+// ClearCookie стирает все куки, хранящиеся в клиенте.
 func (c *Client) ClearCookie() {
 	c.Client.Jar, _ = cookiejar.New(nil)
 }
