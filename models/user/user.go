@@ -1,7 +1,7 @@
 package user
 
 import (
-	"github.com/13pinj/todoapp/models/todo_list"
+	"github.com/13pinj/todoapp/models/todolist"
 	"github.com/gin-gonic/gin"
 )
 
@@ -10,7 +10,7 @@ type User struct {
 	ID      uint
 	Name    string
 	PwdHash string
-	Lists   []*todo_list.TodoList
+	Lists   []*todolist.TodoList
 }
 
 // imUser - внутреннее представление модели.

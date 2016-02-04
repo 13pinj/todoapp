@@ -1,4 +1,4 @@
-package todo_list
+package todolist
 
 import (
 	"errors"

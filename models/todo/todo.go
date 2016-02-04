@@ -45,6 +45,8 @@ func Find(id uint) (*Todo, bool) {
 	return nil, false
 }
 
+// FindByList возвращает все Todo в базе, связанные со списком,
+// имеющим заданный ID.
 func FindByList(listid uint) []*Todo {
 	slice := []*Todo{}
 	for _, v := range st {
