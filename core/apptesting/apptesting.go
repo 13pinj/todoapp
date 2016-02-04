@@ -2,6 +2,8 @@ package apptesting
 
 import (
 	"fmt"
+	"net/http"
+	"net/http/cookiejar"
 	"net/url"
 	"runtime"
 
@@ -48,4 +50,30 @@ func NewServer(fn gin.HandlerFunc) *Server {
 		panic(err)
 	}
 	return &Server{URL: serverURL}
+}
+
+type Client struct {
+	*http.Client
+}
+
+func NewClient() *Client {
+	jar, _ := cookiejar.New(nil)
+	return &Client{&http.Client{Jar: jar}}
+}
+
+func (c *Client) Get(rawURL string) (resp *http.Response, err error) {
+	resp, err = c.Client.Get(rawURL)
+	if err != nil {
+		return
+	}
+	parsed, err := url.Parse(rawURL)
+	if err != nil {
+		return
+	}
+	c.Client.Jar.SetCookies(parsed, resp.Cookies())
+	return
+}
+
+func (c *Client) ClearCookie() {
+	c.Client.Jar, _ = cookiejar.New(nil)
 }

@@ -1,8 +1,6 @@
 package session
 
 import (
-	"net/http"
-	"net/http/cookiejar"
 	"os"
 	"testing"
 
@@ -25,19 +23,12 @@ func TestMain(m *testing.M) {
 
 // Отправляет с локального клиента запрос на сервер и возвращает
 // полученную для него сессию.
-func retrieveSession(client *http.Client) Session {
-	if client.Jar == nil {
-		jar, _ := cookiejar.New(nil)
-		client.Jar = jar
-	}
-
+func retrieveSession(client *apptesting.Client) Session {
 	resp, err := client.Get(server.URL.String())
 	if err != nil {
 		panic(err)
 	}
 	resp.Body.Close()
-	client.Jar.SetCookies(server.URL, resp.Cookies())
-
 	return session
 }
 
@@ -48,12 +39,12 @@ func TestCookieStoring(t *testing.T) {
 		t.Error("FromContext должна возвращать нулевую сессию для нулевого контекста.")
 	}
 
-	client := &http.Client{}
+	client := apptesting.NewClient()
 
 	sess1 := retrieveSession(client)
 	sess2 := retrieveSession(client)
 
-	client.Jar = nil
+	client.ClearCookie()
 	sess3 := retrieveSession(client)
 
 	// Проверки
@@ -83,7 +74,7 @@ func assertIntKey(t *testing.T, cond string, s Session, key string, expected int
 }
 
 func TestDataStoring(t *testing.T) {
-	client := &http.Client{}
+	client := apptesting.NewClient()
 
 	ints := map[string]int{
 		"int1":       12,
@@ -131,7 +122,7 @@ func TestDataStoring(t *testing.T) {
 	assertIntKey(t, "Значения с пустыми ключами не должны сохраняться.", sess, "", 0)
 
 	// Обнуление куки.
-	client.Jar = nil
+	client.ClearCookie()
 
 	sess = retrieveSession(client)
 	if sess == nil {
