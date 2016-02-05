@@ -49,7 +49,7 @@ func (u *User) zip() *imUser {
 	}
 }
 
-func nameValidate(name string) bool {
+func validateName(name string) bool {
 	for _, v := range imStorage {
 		if v.Name == name {
 			return false
@@ -63,24 +63,24 @@ func nameValidate(name string) bool {
 func Register(name string, password string) (*User, error) {
 	ok := strings.Contains(name, " ")
 	if ok {
-		return nil, errors.New("Использование пробела в имени пользователя не допускается")
+		return nil, errors.New("Пробел в имени запрещен")
 	}
 	if len([]rune(name)) < 4 {
-		return nil, errors.New("Использование имени пользователя короче 4 символов не допускается")
+		return nil, errors.New("Имя слишком короткое (минимум 4 символов)")
 	}
 	if len([]rune(password)) < 6 {
-		return nil, errors.New("Использование пароля короче 4 символов не допускается")
+		return nil, errors.New("Пароль слишком короткий (минимум 6 символов)")
 	}
-	if !nameValidate(name) {
-		return nil, errors.New("Имя пользователя присутствует в базе")
+	if !validateName(name) {
+		return nil, errors.New("Имя кем-то занято")
 	}
-	record := User{}
-	record.Name = name
 	hash := sha1.Sum([]byte(password))
-	str := fmt.Sprintf("%x", hash)
-	record.PwdHash = str
+	record := &User{
+		Name:    name,
+		PwdHash: fmt.Sprintf("%x", hash),
+	}
 	record.save()
-	return &record, nil
+	return record, nil
 }
 
 func (u *User) save() {
@@ -97,24 +97,24 @@ func (u *User) save() {
 // а вторым true. В противном случае - nil и false.
 // Login перезапишет старые данные об авторизации, если таковые имеются.
 func Login(c *gin.Context, name string, password string) (*User, bool) {
-	FoundUser := (*User)(nil)
-	for _, user := range imStorage {
-		if user.Name == name {
-			FoundUser = user.format()
+	user := (*User)(nil)
+	for _, u := range imStorage {
+		if u.Name == name {
+			user = u.format()
 			break
 		}
 	}
-	if FoundUser == nil {
+	if user == nil {
 		return nil, false
 	}
 	hash := sha1.Sum([]byte(password))
 	str := fmt.Sprintf("%x", hash)
-	if str == FoundUser.PwdHash {
-		st := session.FromContext(c)
-		st.SetInt("user_id", int(FoundUser.ID))
-		return FoundUser, true
+	if str != user.PwdHash {
+		return nil, false
 	}
-	return nil, false
+	st := session.FromContext(c)
+	st.SetInt("user_id", int(user.ID))
+	return user, true
 }
 
 // Logout стирает данные об авторизации из сессии пользователя.
