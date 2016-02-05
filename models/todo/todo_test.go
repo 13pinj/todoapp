@@ -1,6 +1,10 @@
 package todo
 
-import "testing"
+import (
+	"fmt"
+	"math/rand"
+	"testing"
+)
 
 func TestNew(t *testing.T) {
 	lbl1 := "First todo"
@@ -16,6 +20,10 @@ func TestNew(t *testing.T) {
 
 	if todo1.ID != 0 || todo2.ID != 0 || empty.ID != 0 {
 		t.Error("ID несохраненных дел не должны быть присвоены")
+	}
+
+	if todo1.TodoListID != 0 || todo2.TodoListID != 0 || empty.TodoListID != 0 {
+		t.Error("ID списков несохраненных дел не должны быть присвоены")
 	}
 
 	if todo1.Done != false || todo2.Done != false || empty.Done != false {
@@ -39,10 +47,12 @@ func TestTodo_Save(t *testing.T) {
 		t.FailNow()
 	}
 
+	todo1.TodoListID = 12
 	if err := todo1.Save(); err != nil {
 		t.Error("Сохранение валидного Todo не должно вызывать ошибок")
 	}
 	todo2.Done = true
+	todo2.TodoListID = 14
 	if err := todo2.Save(); err != nil {
 		t.Error("Сохранение валидного Todo не должно вызывать ошибок")
 	}
@@ -77,11 +87,14 @@ func TestTodo_Save(t *testing.T) {
 		t.FailNow()
 	}
 
-	if todo1_0.Done != false || todo2_0.Done != true {
+	if todo1_0.Done != todo1.Done || todo2_0.Done != todo2.Done {
 		t.Error("Поле Done должно успешно сохраняться")
 	}
-	if todo1_0.Label != lbl1 || todo2_0.Label != lbl2 {
+	if todo1_0.Label != todo1.Label || todo2_0.Label != todo2.Label {
 		t.Error("Поле Label должно успешно сохраняться")
+	}
+	if todo1_0.TodoListID != todo1.TodoListID || todo2_0.TodoListID != todo2.TodoListID {
+		t.Error("Поле TodoListID должно успешно сохраняться")
 	}
 
 	if t.Failed() {
@@ -102,6 +115,13 @@ func TestTodo_Save(t *testing.T) {
 	if todo2_2.Label != lbl2 {
 		t.Error("В случае несохранения, структура в базе не должна быть изменена")
 	}
+
+	todo2_1.Done = !todo2_1.Done
+	todo2_1.Save()
+	todo2_2, _ = Find(todo2_1.ID)
+	if todo2_2.Label != todo2_1.Label || todo2_2.Done != todo2_1.Done {
+		t.Errorf("При пересохранении структуру, данные должны обновляться. Ожидалось %#v, получено %#v.", todo2_1, todo2_2)
+	}
 }
 
 func TestFind(t *testing.T) {
@@ -114,9 +134,12 @@ func TestFind(t *testing.T) {
 	if todo1 == nil || todo2 == nil {
 		t.FailNow()
 	}
+
+	todo2.TodoListID = 12
 	if err := todo1.Save(); err != nil {
 		t.FailNow()
 	}
+	todo2.TodoListID = 14
 	todo2.Done = true
 	if err := todo2.Save(); err != nil {
 		t.FailNow()
@@ -129,8 +152,11 @@ func TestFind(t *testing.T) {
 	if todo1_0 == nil {
 		t.Fatal("Find() не должно возвращать nil в случае успешной находки")
 	}
-	if todo1_0.ID != todo1.ID || todo1_0.Done != todo1.Done || todo1_0.Label != todo1.Label {
-		t.Fatal("Todo, найденного через Find() должно быть эквивалентно искомому")
+	if todo1_0.ID != todo1.ID ||
+		todo1_0.Done != todo1.Done ||
+		todo1_0.Label != todo1.Label ||
+		todo1_0.TodoListID != todo1.TodoListID {
+		t.Fatal("Todo, найденное через Find(), должно быть эквивалентно искомому")
 	}
 
 	todo2_0, ok := Find(todo2.ID)
@@ -140,7 +166,10 @@ func TestFind(t *testing.T) {
 	if todo2_0 == nil {
 		t.Fatal("Find() не должно возвращать nil в случае успешной находки")
 	}
-	if todo2_0.ID != todo2.ID || todo2_0.Done != todo2.Done || todo2_0.Label != todo2.Label {
+	if todo2_0.ID != todo2.ID ||
+		todo2_0.Done != todo2.Done ||
+		todo2_0.Label != todo2.Label ||
+		todo2_0.TodoListID != todo2.TodoListID {
 		t.Fatal("Todo, найденного через Find() должно быть эквивалентно искомому")
 	}
 
@@ -190,5 +219,50 @@ func TestTodo_Destroy(t *testing.T) {
 	}
 	if _, ok := Find(id2); !ok {
 		t.Error("Destroy() на несохраненной структуре не должно затрагивать другие структуры в базе")
+	}
+}
+
+func TestFindByList(t *testing.T) {
+	type findMap map[uint]bool
+	testLists := make(map[uint]findMap)
+
+	for i := 130; i < 135; i++ {
+		ui := uint(i)
+
+		testLists[ui] = make(findMap)
+		n := rand.Int() % 10
+
+		for j := 0; j < n; j++ {
+			todo := New(fmt.Sprintf("Todo #%v", j))
+			if todo == nil {
+				t.Fatal("New() должно работать корректно (nil)")
+			}
+
+			todo.TodoListID = ui
+			err := todo.Save()
+			if err != nil {
+				t.Fatalf("Save() должно работать корректно: %v", err)
+			}
+
+			testLists[ui][todo.ID] = false
+		}
+	}
+
+	for listID, fm := range testLists {
+		todos := FindByList(listID)
+		for _, td := range todos {
+			_, ok := fm[td.ID]
+			if !ok {
+				t.Errorf("Для списка %v найден лишний элемент %#v", listID, td)
+				break
+			}
+			fm[td.ID] = true
+		}
+
+		for id, b := range fm {
+			if !b {
+				t.Errorf("Для списка %v не найден элемент %#v", listID, id)
+			}
+		}
 	}
 }
