@@ -126,7 +126,7 @@ func TestRegister(t *testing.T) {
 	shortNameCred := cred{"sta", "qwerty1234"}
 	_, err = Register(shortNameCred.name, shortNameCred.pass)
 	if err == nil {
-		t.Errorf("Register() не должен регистрировать никнеймы короче 4 символов (%q).", shortNameCred.name)
+		t.Errorf("Register() не должен регистрировать никнеймы короче 6 символов (%q).", shortNameCred.name)
 	}
 	shortNameCred = cred{"star", "qwerty1234"}
 	_, err = Register(shortNameCred.name, shortNameCred.pass)
@@ -249,8 +249,8 @@ func TestLoginFromContext(t *testing.T) {
 	if lastUser == nil {
 		t.Fatalf("Login() не должно возвращать нулевой указатель после перезаписи входа (%#v)", cr)
 	}
-	if lastUser.Name != cr.name {
-		t.Errorf("Login() должно возвращать правильную структуру после перезаписи входа. Ожидалось %q, получено %q.", cr.name, lastUser.Name)
+	if lastUser.Name != cr2.name {
+		t.Errorf("Login() должно возвращать правильную структуру после перезаписи входа. Ожидалось %q, получено %q.", cr2.name, lastUser.Name)
 	}
 }
 

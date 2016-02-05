@@ -19,8 +19,9 @@ type TodoList struct {
 
 // Представление TodoList в памяти
 type imTodoList struct {
-	ID    uint
-	Title string
+	ID     uint
+	Title  string
+	UserID uint
 }
 
 // Хранилище списков дел внутри памяти.
@@ -30,9 +31,10 @@ var key uint
 // Функция форматирования внутреннего представления TodoList во внешее представление.
 func (l *imTodoList) format() *TodoList {
 	return &TodoList{
-		ID:    l.ID,
-		Title: l.Title,
-		Todos: todo.FindByList(l.ID),
+		ID:     l.ID,
+		Title:  l.Title,
+		Todos:  todo.FindByList(l.ID),
+		UserID: l.UserID,
 	}
 }
 
@@ -47,7 +49,13 @@ func New(t string) *TodoList {
 // FindByUser возвращает все списки в базе, принадлежащие пользователю
 // с заданным ID.
 func FindByUser(userID uint) []*TodoList {
-	return nil
+	slice := []*TodoList{}
+	for _, v := range imStorage {
+		if v.UserID == userID {
+			slice = append(slice, v.format())
+		}
+	}
+	return slice
 }
 
 // Find возвращает TodoList, сохраненный в базе и имеющий заданный id.
@@ -74,8 +82,9 @@ func (l *TodoList) Save() error {
 		key++
 		l.ID = key
 		imStorage[l.ID] = &imTodoList{
-			ID:    l.ID,
-			Title: l.Title,
+			ID:     l.ID,
+			Title:  l.Title,
+			UserID: l.UserID,
 		}
 	} else {
 		imStorage[l.ID].Title = l.Title
