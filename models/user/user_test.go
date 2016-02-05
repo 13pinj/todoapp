@@ -128,11 +128,31 @@ func TestRegister(t *testing.T) {
 	if err == nil {
 		t.Errorf("Register() не должен регистрировать никнеймы короче 4 символов (%q).", shortNameCred.name)
 	}
+	shortNameCred = cred{"star", "qwerty1234"}
+	_, err = Register(shortNameCred.name, shortNameCred.pass)
+	if err != nil {
+		t.Errorf("Register() должен успешно регистрировать никнеймы длиной в 4 символа (%q).", shortNameCred.name)
+	}
+	shortNameCred = cred{"юни", "qwerty1234"}
+	_, err = Register(shortNameCred.name, shortNameCred.pass)
+	if err == nil {
+		t.Errorf("Register() не должен регистрировать никнеймы короче 4 символов Unicode (%q).", shortNameCred.name)
+	}
 
-	shortPassCred := cred{"starKiller_1337", "qwert"}
+	shortPassCred := cred{"starKiller_1338", "qwert"}
 	_, err = Register(shortPassCred.name, shortPassCred.pass)
 	if err == nil {
 		t.Errorf("Register() не должен регистрировать пароли короче 4 символов (%q).", shortPassCred.pass)
+	}
+	shortPassCred = cred{"starKiller_1339", "qwerty"}
+	_, err = Register(shortPassCred.name, shortPassCred.pass)
+	if err != nil {
+		t.Errorf("Register() должен успешно регистрировать пароли длиной в 6 символов (%q).", shortPassCred.pass)
+	}
+	shortPassCred = cred{"starKiller_1340", "парол"}
+	_, err = Register(shortPassCred.name, shortPassCred.pass)
+	if err == nil {
+		t.Errorf("Register() не должен регистрировать пароли короче 6 символов Unicode (%q).", shortPassCred.pass)
 	}
 }
 
