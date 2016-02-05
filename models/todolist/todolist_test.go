@@ -98,6 +98,12 @@ func TestTodoList_Save(t *testing.T) {
 	if list2_2.Title != title2 {
 		t.Error("В случае несохранения, структура в базе не должна быть изменена")
 	}
+
+	list2_1.Save()
+	list2_2, _ = Find(list2_1.ID)
+	if list2_2.Title != list2_1.Title {
+		t.Error("После пересохранения, структура в базе должна быть обновлена")
+	}
 }
 
 func TestFind(t *testing.T) {
