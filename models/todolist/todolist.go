@@ -13,6 +13,8 @@ type TodoList struct {
 	Title string
 	// Список todo
 	Todos []*todo.Todo
+	// ID пользователя, которому принадлежит список
+	UserID uint
 }
 
 // Представление TodoList в памяти
@@ -40,6 +42,12 @@ func New(t string) *TodoList {
 	record := TodoList{}
 	record.Title = t
 	return &record
+}
+
+// FindByUser возвращает все списки в базе, принадлежащие пользователю
+// с заданным ID.
+func FindByUser(userID uint) []*TodoList {
+	return nil
 }
 
 // Find возвращает TodoList, сохраненный в базе и имеющий заданный id.

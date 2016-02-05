@@ -1,6 +1,8 @@
 package todolist
 
 import (
+	"fmt"
+	"math/rand"
 	"testing"
 
 	"github.com/13pinj/todoapp/models/todo"
@@ -22,6 +24,10 @@ func TestNew(t *testing.T) {
 		t.Error("ID несохраненных списков не должны быть присвоены")
 	}
 
+	if list1.UserID != 0 || list2.UserID != 0 || empty.UserID != 0 {
+		t.Error("UserID несохраненных списков не должны быть присвоены")
+	}
+
 	if list1.Title != title1 || list2.Title != title2 || empty.Title != "" {
 		t.Error("New() должно сохранять заголовок списка")
 	}
@@ -39,9 +45,11 @@ func TestTodoList_Save(t *testing.T) {
 		t.FailNow()
 	}
 
+	list1.UserID = 12
 	if err := list1.Save(); err != nil {
 		t.Error("Сохранение валидного списка не должно вызывать ошибок")
 	}
+	list2.UserID = 14
 	if err := list2.Save(); err != nil {
 		t.Error("Сохранение валидного списка не должно вызывать ошибок")
 	}
@@ -80,6 +88,10 @@ func TestTodoList_Save(t *testing.T) {
 		t.Error("Поле заголовка должно успешно сохраняться")
 	}
 
+	if list1_0.UserID != list1.UserID || list2_0.UserID != list2.UserID {
+		t.Error("Поле UserID должно успешно сохраняться")
+	}
+
 	if t.Failed() {
 		t.FailNow()
 	}
@@ -116,9 +128,11 @@ func TestFind(t *testing.T) {
 	if list1 == nil || list2 == nil {
 		t.FailNow()
 	}
+	list1.UserID = 12
 	if err := list1.Save(); err != nil {
 		t.FailNow()
 	}
+	list2.UserID = 14
 	if err := list2.Save(); err != nil {
 		t.FailNow()
 	}
@@ -130,7 +144,7 @@ func TestFind(t *testing.T) {
 	if list1_0 == nil {
 		t.Fatal("Find() не должно возвращать nil в случае успешной находки")
 	}
-	if list1_0.ID != list1.ID || list1_0.Title != list1.Title {
+	if list1_0.ID != list1.ID || list1_0.Title != list1.Title || list1_0.UserID != list1.UserID {
 		t.Fatal("Todo, найденного через Find() должно быть эквивалентно искомому")
 	}
 
@@ -141,8 +155,8 @@ func TestFind(t *testing.T) {
 	if list2_0 == nil {
 		t.Fatal("Find() не должно возвращать nil в случае успешной находки")
 	}
-	if list2_0.ID != list2.ID || list2_0.Title != list2.Title {
-		t.Fatal("Todo, найденного через Find() должно быть эквивалентно искомому")
+	if list2_0.ID != list2.ID || list2_0.Title != list2.Title || list2_0.UserID != list2.UserID {
+		t.Fatal("Список, найденный через Find() должен быть эквивалентен искомому")
 	}
 
 	randomID := uint(1337)
@@ -300,5 +314,50 @@ func TestTodoList_Add(t *testing.T) {
 
 	if err := list1.Add(""); err == nil {
 		t.Error("Add() не должен добавлять задания с пустым текстом.")
+	}
+}
+
+func TestFindByList(t *testing.T) {
+	type findMap map[uint]bool
+	testUsers := make(map[uint]findMap)
+
+	for i := 130; i < 135; i++ {
+		ui := uint(i)
+
+		testUsers[ui] = make(findMap)
+		n := rand.Int() % 10
+
+		for j := 0; j < n; j++ {
+			list := New(fmt.Sprintf("Todo #%v", j))
+			if list == nil {
+				t.Fatal("New() должно работать корректно (nil)")
+			}
+
+			list.UserID = ui
+			err := list.Save()
+			if err != nil {
+				t.Fatalf("Save() должно работать корректно: %v", err)
+			}
+
+			testUsers[ui][list.ID] = false
+		}
+	}
+
+	for userID, fm := range testUsers {
+		lists := FindByUser(userID)
+		for _, l := range lists {
+			_, ok := fm[l.ID]
+			if !ok {
+				t.Errorf("Для пользователя %v найден лишний элемент %#v", userID, l)
+				break
+			}
+			fm[l.ID] = true
+		}
+
+		for id, b := range fm {
+			if !b {
+				t.Errorf("Для пользователя %v не найден элемент %#v", userID, id)
+			}
+		}
 	}
 }
