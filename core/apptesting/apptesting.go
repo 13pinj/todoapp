@@ -79,6 +79,21 @@ func (c *Client) Get(rawURL string) (resp *http.Response, err error) {
 	return
 }
 
+// PostForm ведет себя как http.Client.PostForm, но в случае успешного запроса
+// сохраняет все полученные куки.
+func (c *Client) PostForm(rawURL string, data url.Values) (resp *http.Response, err error) {
+	resp, err = c.Client.PostForm(rawURL, data)
+	if err != nil {
+		return
+	}
+	parsed, err := url.Parse(rawURL)
+	if err != nil {
+		return
+	}
+	c.Client.Jar.SetCookies(parsed, resp.Cookies())
+	return
+}
+
 // ClearCookie стирает все куки, хранящиеся в клиенте.
 func (c *Client) ClearCookie() {
 	c.Client.Jar, _ = cookiejar.New(nil)
