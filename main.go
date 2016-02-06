@@ -14,6 +14,7 @@ func SomeFirstPage(c *gin.Context) {
 
 func main() {
 	site := gin.Default()
+	site.LoadHTMLGlob("templates/*")
 	site.GET("/", SomeFirstPage)
 	site.Run(":8080")
 }
