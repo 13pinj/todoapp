@@ -26,3 +26,8 @@ func Render404(c *gin.Context) {
 func Render500(c *gin.Context) {
 
 }
+
+// Redirect выполняет перенаправление.
+func Redirect(c *gin.Context, path string) {
+
+}
