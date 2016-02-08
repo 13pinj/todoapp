@@ -60,7 +60,9 @@ func Login(c *gin.Context) {
 	_, ok = user.Login(c, name, pas)
 	if !ok {
 		c.String(http.StatusOK, "Ошибка авторизации")
+		return
 	}
+	ctl.Redirect(c, "/")
 }
 
 // Logout выполняет выход и перенаправляет на главную.
