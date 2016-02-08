@@ -9,8 +9,10 @@ import (
 )
 
 var (
-	server  *apptesting.Server
-	session Session
+	server   *apptesting.Server
+	dsServer *apptesting.Server
+	session  Session
+	session2 Session
 )
 
 func TestMain(m *testing.M) {
@@ -18,6 +20,13 @@ func TestMain(m *testing.M) {
 		session = FromContext(c)
 	}
 	server = apptesting.NewServer(hf)
+
+	hf = func(c *gin.Context) {
+		session = FromContext(c)
+		session2 = FromContext(c)
+	}
+	dsServer = apptesting.NewServer(hf)
+
 	os.Exit(m.Run())
 }
 
@@ -139,4 +148,28 @@ func TestDataStoring(t *testing.T) {
 	}
 	assertIntKey(t, "Сессия должна сохранять значения int.", sess, missingInt, 12)
 
+}
+
+func TestDoubleFromContext(t *testing.T) {
+	client := apptesting.NewClient()
+
+	resp, err := client.Get(dsServer.URL.String())
+	if err != nil {
+		panic(err)
+	}
+	resp.Body.Close()
+
+	if session.ID() != session2.ID() {
+		t.Error("Двойной вызов FromContext на чистом клиенте отдал разные сессии")
+	}
+
+	resp, err = client.Get(dsServer.URL.String())
+	if err != nil {
+		panic(err)
+	}
+	resp.Body.Close()
+
+	if session.ID() != session2.ID() {
+		t.Error("Двойной вызов FromContext отдал разные сессии")
+	}
 }
