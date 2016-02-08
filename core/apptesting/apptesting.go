@@ -30,6 +30,7 @@ func NewServer(fn gin.HandlerFunc) *Server {
 
 	gin.SetMode(gin.TestMode)
 	r := gin.New()
+	r.LoadHTMLGlob("../../templates/*")
 	r.GET("/test/url", fn)
 	r.POST("/test/url", fn)
 
