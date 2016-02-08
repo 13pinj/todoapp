@@ -1,4 +1,9 @@
 {{template "header" .}}
+<ul style="color:darkred;">
+  {{range .Errors}}
+  <li>{{.}}</li>
+  {{end}}
+</ul>
 <form action="/login" method="post">
   <input type="text" name="name" value=""><br>
   <input type="password" name="password" value=""><br>
