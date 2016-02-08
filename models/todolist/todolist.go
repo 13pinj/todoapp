@@ -2,6 +2,7 @@ package todolist
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/13pinj/todoapp/models/todo"
 )
@@ -164,4 +165,9 @@ func (l *TodoList) Done() []*todo.Todo {
 		}
 	}
 	return slice
+}
+
+// Path возвращает путь к странице списка.
+func (l *TodoList) Path() string {
+	return fmt.Sprintf("/list/%d", l.ID)
 }
