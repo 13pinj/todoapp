@@ -1,8 +1,6 @@
 package users
 
 import (
-	"net/http"
-
 	"github.com/13pinj/todoapp/controllers"
 	"github.com/13pinj/todoapp/models/user"
 	"github.com/gin-gonic/gin"
@@ -30,7 +28,7 @@ func Register(c *gin.Context) {
 	pas := c.PostForm("password")
 	us, err := user.Register(name, pas)
 	if err != nil {
-		c.String(http.StatusOK, err.Error())
+		ctl.RenderHTML(c, "register.tmpl", gin.H{"Errors": []string{err.Error()}})
 		return
 	}
 	us.AutoLogin(c)
@@ -59,7 +57,7 @@ func Login(c *gin.Context) {
 	pas := c.PostForm("password")
 	_, ok = user.Login(c, name, pas)
 	if !ok {
-		c.String(http.StatusOK, "Ошибка авторизации")
+		ctl.RenderHTML(c, "login.tmpl", gin.H{"Errors": []string{"Ошибка авторизации"}})
 		return
 	}
 	ctl.Redirect(c, "/")
@@ -80,5 +78,5 @@ func Destroy(c *gin.Context) {
 		us.Destroy()
 		ctl.Redirect(c, "/")
 	}
-	c.String(http.StatusOK, "Пользователь не найден")
+	ctl.Redirect(c, "/")
 }
