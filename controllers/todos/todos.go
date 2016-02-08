@@ -103,7 +103,7 @@ func DestroyList(c *gin.Context) {
 
 // CreateTask создает новое задание в списке с текстом
 // из POST-параметра label и перенаправляет на страницу списка.
-// POST /list/:id/task-create
+// POST /list/:id/add
 func CreateTask(c *gin.Context) {
 
 }
@@ -112,13 +112,13 @@ func CreateTask(c *gin.Context) {
 // Поля, для который не заданы значения в параметрах запроса, должны остаться
 // неизменными.
 // После выполнения запроса UpdateTask перенаправляет клиент на страницу списка.
-// POST /list/:id/task-update/:task-id
+// POST /task/:id/update
 func UpdateTask(c *gin.Context) {
 
 }
 
 // DestroyTask стирает задание из списка и перенаправляет на страницу списка.
-// POST /list/:id/task-destroy/:task-id
+// POST /task/:id/destroy
 func DestroyTask(c *gin.Context) {
 
 }
