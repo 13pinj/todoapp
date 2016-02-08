@@ -1,6 +1,14 @@
 package todos
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+	"strconv"
+
+	"github.com/13pinj/todoapp/controllers"
+	"github.com/13pinj/todoapp/models/todolist"
+	"github.com/13pinj/todoapp/models/user"
+	"github.com/gin-gonic/gin"
+)
 
 // Index выводит страницу со всеми списками дел текущего пользователя.
 // Если пользователь незалогинен, перенаправляет на главную.
@@ -13,7 +21,19 @@ func Index(c *gin.Context) {
 // и перенаправляет на страницу этого списка.
 // POST /list-create
 func CreateList(c *gin.Context) {
-
+	u, ok := user.FromContext(c)
+	if !ok {
+		ctl.Render403(c)
+		return
+	}
+	l := todolist.New(c.PostForm("title"))
+	l.UserID = u.ID
+	err := l.Save()
+	if err != nil {
+		c.String(http.StatusOK, err.Error())
+		return
+	}
+	ctl.Redirect(c, l.Path())
 }
 
 // ShowList выводит страницу списка дел, на которой отображается его заголовок
@@ -27,13 +47,58 @@ func ShowList(c *gin.Context) {
 // POST-параметре title и перенаправляет на страницу этого списка.
 // POST /list/:id/update
 func UpdateList(c *gin.Context) {
-
+	u, ok := user.FromContext(c)
+	if !ok {
+		ctl.Render403(c)
+		return
+	}
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		ctl.Render404(c)
+		return
+	}
+	l, ok := todolist.Find(uint(id))
+	if !ok {
+		ctl.Render404(c)
+		return
+	}
+	if l.UserID != u.ID {
+		ctl.Render403(c)
+		return
+	}
+	l.Title = c.PostForm("title")
+	err = l.Save()
+	if err != nil {
+		c.String(http.StatusOK, err.Error())
+		return
+	}
+	ctl.Redirect(c, l.Path())
 }
 
 // DestroyList стирает список из базы и перенаправляет на главную.
 // POST /list/:id/destroy
 func DestroyList(c *gin.Context) {
-
+	u, ok := user.FromContext(c)
+	if !ok {
+		ctl.Render403(c)
+		return
+	}
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		ctl.Render404(c)
+		return
+	}
+	l, ok := todolist.Find(uint(id))
+	if !ok {
+		ctl.Render404(c)
+		return
+	}
+	if l.UserID != u.ID {
+		ctl.Render403(c)
+		return
+	}
+	l.Destroy()
+	ctl.Redirect(c, "/")
 }
 
 // CreateTask создает новое задание в списке с текстом
