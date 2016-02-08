@@ -30,10 +30,10 @@ func NewServer(fn gin.HandlerFunc) *Server {
 
 	gin.SetMode(gin.TestMode)
 	r := gin.New()
-	r.GET("/", fn)
+	r.GET("/test/url", fn)
 
 	addr := fmt.Sprintf(":%v", lastPort)
-	urlString := fmt.Sprintf("http://localhost:%v/", lastPort)
+	urlString := fmt.Sprintf("http://localhost:%v/test/url", lastPort)
 	lastPort++
 
 	// Сервер запускается в отдельной горутине.
