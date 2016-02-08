@@ -31,6 +31,7 @@ func NewServer(fn gin.HandlerFunc) *Server {
 	gin.SetMode(gin.TestMode)
 	r := gin.New()
 	r.GET("/test/url", fn)
+	r.POST("/test/url", fn)
 
 	addr := fmt.Sprintf(":%v", lastPort)
 	urlString := fmt.Sprintf("http://localhost:%v/test/url", lastPort)
