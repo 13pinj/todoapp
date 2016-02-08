@@ -3,11 +3,20 @@ package ctl
 import (
 	"net/http"
 
+	"github.com/13pinj/todoapp/models/user"
 	"github.com/gin-gonic/gin"
 )
 
 // RenderHTML отвечает на запрос кодом 200 и выполненным шаблоном.
-func RenderHTML(c *gin.Context, template string, data interface{}) {
+func RenderHTML(c *gin.Context, template string, data gin.H) {
+	u, ok := user.FromContext(c)
+	if data == nil {
+		data = gin.H{}
+	}
+	data["LoggedIn"] = ok
+	if ok {
+		data["CurrentUser"] = u
+	}
 	c.HTML(http.StatusOK, template, data)
 }
 

@@ -1,20 +1,19 @@
 package main
 
 import (
-	"net/http"
-
+	"github.com/13pinj/todoapp/controllers/page"
+	"github.com/13pinj/todoapp/controllers/users"
 	"github.com/gin-gonic/gin"
 )
-
-func SomeFirstPage(c *gin.Context) {
-	c.String(http.StatusOK, "Ну здраствуй,\n")
-	c.String(http.StatusOK, "Ты на заглавной странице сайта,\n")
-	c.String(http.StatusOK, "На котором пока что совсем ничего нету")
-}
 
 func main() {
 	site := gin.Default()
 	site.LoadHTMLGlob("templates/*")
-	site.GET("/", SomeFirstPage)
+	site.GET("/", page.Home)
+	site.GET("/login", users.LoginForm)
+	site.POST("/login", users.Login)
+	site.GET("/register", users.RegistrationForm)
+	site.POST("/register", users.Register)
+	site.POST("/logout", users.Logout)
 	site.Run(":8080")
 }

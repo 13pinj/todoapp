@@ -12,7 +12,7 @@ import (
 // Пользователей, уже выполнивших вход, она перенаправляет на главную.
 // GET /register
 func RegistrationForm(c *gin.Context) {
-
+	ctl.RenderHTML(c, "register.tmpl", nil)
 }
 
 // Register регистрирует нового пользователя, используя параметры POST-запроса
@@ -41,7 +41,7 @@ func Register(c *gin.Context) {
 // Пользователей, уже выполнивших вход, она перенаправляет на главную.
 // GET /login
 func LoginForm(c *gin.Context) {
-
+	ctl.RenderHTML(c, "login.tmpl", nil)
 }
 
 // Login выполняет вход, используя параметры POST-запроса
@@ -67,6 +67,7 @@ func Login(c *gin.Context) {
 // POST /logout
 func Logout(c *gin.Context) {
 	user.Logout(c)
+	ctl.Redirect(c, "/")
 }
 
 // Destroy удаляет текущего пользователя и перенаправляет на главную.

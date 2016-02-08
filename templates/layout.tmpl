@@ -1,0 +1,23 @@
+{{define "header"}}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TodoApp</title>
+</head>
+<body>
+  <p>
+    {{if .LoggedIn}}
+    <b>{{.CurrentUser.Name}}</b> |
+    <form action="/logout" method="post">
+      <input type="submit" name="submit" value="Выход">
+    </form>
+    {{else}}
+    <a href="/login">Вход</a> |
+    <a href="/register">Регистрация</a>
+    {{end}}
+  </p>
+{{end}}
+{{define "footer"}}
+</body>
+</html>
+{{end}}
