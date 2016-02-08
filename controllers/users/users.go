@@ -29,7 +29,6 @@ func Register(c *gin.Context) {
 	name := c.PostForm("name")
 	pas := c.PostForm("password")
 	us, err := user.Register(name, pas)
-	user.Login(name, pas)
 	if err != nil {
 		c.String(http.StatusOK, err.Error())
 		return
