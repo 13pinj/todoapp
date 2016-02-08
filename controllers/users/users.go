@@ -39,7 +39,7 @@ func Register(c *gin.Context) {
 
 // LoginForm отсылает форму входа.
 // Пользователей, уже выполнивших вход, она перенаправляет на главную.
-// GET /login
+// GET /
 func LoginForm(c *gin.Context) {
 	ctl.RenderHTML(c, "login.tmpl", nil)
 }

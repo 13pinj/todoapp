@@ -10,7 +10,6 @@ func main() {
 	site := gin.Default()
 	site.LoadHTMLGlob("templates/*")
 	site.GET("/", page.Home)
-	site.GET("/login", users.LoginForm)
 	site.POST("/login", users.Login)
 	site.GET("/register", users.RegistrationForm)
 	site.POST("/register", users.Register)
