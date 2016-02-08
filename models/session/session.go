@@ -82,12 +82,26 @@ func FromContext(c *gin.Context) Session {
 	if c == nil {
 		return nil
 	}
-	key, ok := hasSession(c)
-	if ok {
-		ses, ok := mapSession[key]
+
+	iid, exists := c.Get("session_id")
+	if exists {
+		id := iid.(string)
+		ses, ok := mapSession[id]
 		if ok {
 			return ses
 		}
 	}
-	return sessionInit(c)
+
+	key, ok := hasSession(c)
+	if ok {
+		ses, ok := mapSession[key]
+		if ok {
+			c.Set("session_id", key)
+			return ses
+		}
+	}
+
+	ses := sessionInit(c)
+	c.Set("session_id", ses.ID())
+	return ses
 }
