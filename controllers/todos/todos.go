@@ -15,7 +15,14 @@ import (
 // Если пользователь незалогинен, перенаправляет на главную.
 // GET /
 func Index(c *gin.Context) {
-
+	u, ok := user.FromContext(c)
+	if !ok {
+		ctl.Redirect(c, "/")
+		return
+	}
+	ctl.RenderHTML(c, "todos_index.tmpl", gin.H{
+		"Lists": u.Lists,
+	})
 }
 
 // CreateList создает новый список дел с заголовком из POST-параметра title
@@ -41,7 +48,13 @@ func CreateList(c *gin.Context) {
 // и содержание.
 // GET /list/:id
 func ShowList(c *gin.Context) {
-
+	l, ok := getlist(c)
+	if !ok {
+		return
+	}
+	ctl.RenderHTML(c, "todos_show.tmpl", gin.H{
+		"List": l,
+	})
 }
 
 // UpdateList изменяет заголовок списка на тот, который был получен
@@ -55,10 +68,15 @@ func UpdateList(c *gin.Context) {
 	l.Title = c.PostForm("title")
 	err := l.Save()
 	if err != nil {
-		c.String(http.StatusOK, err.Error())
+		ctl.RenderJSON(c, gin.H{
+			"status": "error",
+			"error":  err.Error(),
+		})
 		return
 	}
-	ctl.Redirect(c, l.Path())
+	ctl.RenderJSON(c, gin.H{
+		"status": "success",
+	})
 }
 
 // DestroyList стирает список из базы и перенаправляет на главную.
@@ -69,7 +87,7 @@ func DestroyList(c *gin.Context) {
 		return
 	}
 	l.Destroy()
-	ctl.Redirect(c, "/")
+	c.Status(http.StatusOK)
 }
 
 // CreateTask создает новое задание в списке с текстом
@@ -82,7 +100,10 @@ func CreateTask(c *gin.Context) {
 	}
 	err := l.Add(c.PostForm("label"))
 	if err != nil {
-		c.String(http.StatusOK, err.Error())
+		ctl.RenderHTML(c, "todos_show.tmpl", gin.H{
+			"List":       l,
+			"AlertError": err.Error(),
+		})
 		return
 	}
 	ctl.Redirect(c, l.Path())
@@ -94,7 +115,7 @@ func CreateTask(c *gin.Context) {
 // После выполнения запроса UpdateTask перенаправляет клиент на страницу списка.
 // POST /task/:id/update
 func UpdateTask(c *gin.Context) {
-	td, l, ok := gettask(c)
+	td, _, ok := gettask(c)
 	if !ok {
 		return
 	}
@@ -108,21 +129,26 @@ func UpdateTask(c *gin.Context) {
 	}
 	err := td.Save()
 	if err != nil {
-		c.String(http.StatusOK, err.Error())
+		ctl.RenderJSON(c, gin.H{
+			"status": "error",
+			"error":  err.Error(),
+		})
 		return
 	}
-	ctl.Redirect(c, l.Path())
+	ctl.RenderJSON(c, gin.H{
+		"status": "success",
+	})
 }
 
 // DestroyTask стирает задание из списка и перенаправляет на страницу списка.
 // POST /task/:id/destroy
 func DestroyTask(c *gin.Context) {
-	td, l, ok := gettask(c)
+	td, _, ok := gettask(c)
 	if !ok {
 		return
 	}
 	td.Destroy()
-	ctl.Redirect(c, l.Path())
+	c.Status(http.StatusOK)
 }
 
 func getlist(c *gin.Context) (*todolist.TodoList, bool) {

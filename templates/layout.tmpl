@@ -3,6 +3,7 @@
 <html>
 <head>
   <title>TodoApp</title>
+  <script src="/s/js/todoapp.js" charset="utf-8"></script>
 </head>
 <body>
   <p>
@@ -15,6 +16,9 @@
     <a href="/">Вход</a> |
     <a href="/register">Регистрация</a>
     {{end}}
+  </p>
+  <p style="color:red;font-weight:bold;" id="error-alert">
+    {{if .AlertError}}{{.AlertError}}{{end}}
   </p>
 {{end}}
 {{define "footer"}}

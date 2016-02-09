@@ -1,0 +1,18 @@
+{{template "header" .}}
+<input type="text" class="todolist-title" name="title" value="{{.List.Title}}" data-id="{{.List.ID}}">
+<ul>
+  {{range .List.Todos}}
+  <li class="todo" data-id="{{.ID}}">
+    <input type="checkbox" name="done" {{if .Done}}checked{{end}}>
+    <input type="text" name="label" value="{{.Label}}">
+    <button type="button" name="button" class="delete">X</button>
+  </li>
+  {{else}}
+  <li><i>Дел нет</i></li>
+  {{end}}
+</ul>
+<form action="{{.List.Path}}/add" method="post">
+  <input type="text" name="label" value="">
+  <input type="submit" name="submit" value="Добавить">
+</form>
+{{template "footer" .}}
