@@ -63,6 +63,7 @@ func sessionInit(c *gin.Context) *imSession {
 	http.SetCookie(c.Writer, &http.Cookie{
 		Name:  "SessID",
 		Value: session.id,
+		Path:  "/",
 	})
 	return &session
 }
