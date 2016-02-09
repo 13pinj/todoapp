@@ -98,12 +98,12 @@ func UpdateTask(c *gin.Context) {
 	if !ok {
 		return
 	}
-	label := c.PostForm("label")
-	if label != "" {
+	label, ok := c.GetPostForm("label")
+	if ok {
 		td.Label = label
 	}
-	done := c.PostForm("done")
-	if done != "" {
+	done, ok := c.GetPostForm("done")
+	if ok {
 		td.Done = (done != "0")
 	}
 	err := td.Save()
