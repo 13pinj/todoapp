@@ -84,32 +84,23 @@ func (l *TodoList) Destroy() {
 
 // Len возвращает количество всех дел в списке.
 func (l *TodoList) Len() int {
-	l.LoadTodos()
-	return len(l.Todos)
+	var count int
+	models.DB.Model(&todo.Todo{}).Where("todo_list_id = ?", l.ID).Count(&count)
+	return count
 }
 
 // LenUndone возвращает количество незавершенных дел в списке.
 func (l *TodoList) LenUndone() int {
-	l.LoadTodos()
-	k := 0
-	for _, v := range l.Todos {
-		if !v.Done {
-			k++
-		}
-	}
-	return k
+	var count int
+	models.DB.Model(&todo.Todo{}).Where("todo_list_id = ? AND done = ?", l.ID, false).Count(&count)
+	return count
 }
 
 // LenDone возвращает количество завершенных дел в списке.
 func (l *TodoList) LenDone() int {
-	l.LoadTodos()
-	k := 0
-	for _, v := range l.Todos {
-		if v.Done {
-			k++
-		}
-	}
-	return k
+	var count int
+	models.DB.Model(&todo.Todo{}).Where("todo_list_id = ? AND done = ?", l.ID, true).Count(&count)
+	return count
 }
 
 // Add добавляет в список новое назавершенное дело c текстом lbl и сохраняет его в базу.
@@ -131,25 +122,15 @@ func (l *TodoList) Add(lbl string) error {
 
 // Undone возвращает список незавершенных дел.
 func (l *TodoList) Undone() []*todo.Todo {
-	l.LoadTodos()
 	slice := []*todo.Todo{}
-	for _, v := range l.Todos {
-		if !v.Done {
-			slice = append(slice, v)
-		}
-	}
+	models.DB.Model(&todo.Todo{}).Where("todo_list_id = ? AND done = ?", l.ID, false).Find(&slice)
 	return slice
 }
 
 // Done возвращает список завершенных дел.
 func (l *TodoList) Done() []*todo.Todo {
-	l.LoadTodos()
 	slice := []*todo.Todo{}
-	for _, v := range l.Todos {
-		if v.Done {
-			slice = append(slice, v)
-		}
-	}
+	models.DB.Model(&todo.Todo{}).Where("todo_list_id = ? AND done = ?", l.ID, true).Find(&slice)
 	return slice
 }
 
