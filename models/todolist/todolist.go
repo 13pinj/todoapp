@@ -4,39 +4,20 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/13pinj/todoapp/models"
 	"github.com/13pinj/todoapp/models/todo"
+	"github.com/jinzhu/gorm"
 )
 
 // TodoList - структура списка дел
 type TodoList struct {
-	ID uint
+	gorm.Model
 	// Заголовок списка
 	Title string
 	// Список todo
 	Todos []*todo.Todo
 	// ID пользователя, которому принадлежит список
 	UserID uint
-}
-
-// Представление TodoList в памяти
-type imTodoList struct {
-	ID     uint
-	Title  string
-	UserID uint
-}
-
-// Хранилище списков дел внутри памяти.
-var imStorage = make(map[uint]*imTodoList)
-var key uint
-
-// Функция форматирования внутреннего представления TodoList во внешее представление.
-func (l *imTodoList) format() *TodoList {
-	return &TodoList{
-		ID:     l.ID,
-		Title:  l.Title,
-		Todos:  todo.FindByList(l.ID),
-		UserID: l.UserID,
-	}
 }
 
 // New создает новый экземпляр TodoList, но не сохраняет его.
@@ -51,11 +32,7 @@ func New(t string) *TodoList {
 // с заданным ID.
 func FindByUser(userID uint) []*TodoList {
 	slice := []*TodoList{}
-	for _, v := range imStorage {
-		if v.UserID == userID {
-			slice = append(slice, v.format())
-		}
-	}
+	models.DB.Where("user_id = ?", userID).Find(&slice)
 	return slice
 }
 
@@ -63,11 +40,12 @@ func FindByUser(userID uint) []*TodoList {
 // В случае если TodoList не был найден, Find вернет вторым значением false.
 // В случае успеха, второе возвращаемое значение будет true.
 func Find(id uint) (*TodoList, bool) {
-	record, ok := imStorage[id]
-	if ok {
-		return record.format(), true
+	tl := &TodoList{}
+	err := models.DB.Find(tl, id).Error
+	if err != nil {
+		return nil, false
 	}
-	return nil, false
+	return tl, true
 }
 
 // Save сохраняет структуру в базу. Если структура не была прежде сохранена,
@@ -79,26 +57,22 @@ func (l *TodoList) Save() error {
 	if l.Title == "" {
 		return errors.New("Заголовок списка не должен быть пустым")
 	}
-	if l.ID == 0 {
-		key++
-		l.ID = key
-		imStorage[l.ID] = &imTodoList{
-			ID:     l.ID,
-			Title:  l.Title,
-			UserID: l.UserID,
-		}
-	} else {
-		imStorage[l.ID].Title = l.Title
+	err := models.DB.Save(l).Error
+	if err != nil {
+		return err
 	}
 	return nil
 }
 
 // Destroy удаляет структуры из базы.
 func (l *TodoList) Destroy() {
-	delete(imStorage, l.ID)
 	for _, v := range l.Todos {
 		v.Destroy()
 	}
+	if models.DB.NewRecord(l) {
+		return
+	}
+	models.DB.Delete(l)
 }
 
 // Len возвращает количество всех дел в списке.
@@ -132,7 +106,7 @@ func (l *TodoList) LenDone() int {
 // Add не позволяет добавлять дела в несохраненную в базу списки, о чем сообщает ошибкой.
 // Add также возвращает ошибки сохранения Todo.
 func (l *TodoList) Add(lbl string) error {
-	if l.ID == 0 {
+	if models.DB.NewRecord(l) {
 		return errors.New("Нельзя добавлять дела в несохраненный список")
 	}
 	sd := todo.New(lbl)
@@ -170,4 +144,8 @@ func (l *TodoList) Done() []*todo.Todo {
 // Path возвращает путь к странице списка.
 func (l *TodoList) Path() string {
 	return fmt.Sprintf("/list/%d", l.ID)
+}
+
+func init() {
+	models.DB.AutoMigrate(&TodoList{})
 }

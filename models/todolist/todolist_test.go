@@ -3,10 +3,17 @@ package todolist
 import (
 	"fmt"
 	"math/rand"
+	"os"
 	"testing"
 
+	"github.com/13pinj/todoapp/models"
 	"github.com/13pinj/todoapp/models/todo"
 )
+
+func TestMain(m *testing.M) {
+	models.DB.LogMode(false)
+	os.Exit(m.Run())
+}
 
 func TestNew(t *testing.T) {
 	title1 := "First todolist"
