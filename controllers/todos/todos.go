@@ -105,9 +105,11 @@ func CreateTask(c *gin.Context) {
 	}
 	err := l.Add(c.PostForm("label"))
 	if err != nil {
+		u, _ := user.FromContext(c)
 		ctl.RenderHTML(c, "todos_show.tmpl", gin.H{
 			"List":       l,
 			"AlertError": err.Error(),
+			"Lists":      u.Lists,
 		})
 		return
 	}

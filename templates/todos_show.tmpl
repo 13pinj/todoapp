@@ -4,7 +4,6 @@
   <p>{{.CurrentUser.Name}}</p>
   <input type="submit" name="submit" value="Выход">
 </form>
-
 <ul>
   {{range .Lists}}
   <li>
@@ -14,6 +13,9 @@
 </ul>
 
 <input type="text" class="todolist-title" name="title" value="{{.List.Title}}" data-id="{{.List.ID}}">
+<p style="color:red;font-weight:bold;" id="error-alert">
+  {{if .AlertError}}{{.AlertError}}{{end}}
+</p>
 <ul>
   {{range .List.Todos}}
   <li class="todo" data-id="{{.ID}}">
