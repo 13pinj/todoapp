@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/13pinj/todoapp/core/apptesting"
+	"github.com/13pinj/todoapp/models"
 	"github.com/gin-gonic/gin"
 )
 
@@ -53,7 +54,7 @@ func TestMain(m *testing.M) {
 		Logout(c)
 	}
 	logoutServer = apptesting.NewServer(hf)
-
+	models.DB.LogMode(false)
 	os.Exit(m.Run())
 }
 

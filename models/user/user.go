@@ -6,56 +6,26 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/13pinj/todoapp/models"
 	"github.com/13pinj/todoapp/models/session"
 	"github.com/13pinj/todoapp/models/todolist"
 	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/gorm"
 )
 
 // User - структура модели пользователя
 type User struct {
-	ID      uint
+	gorm.Model
 	Name    string
 	PwdHash string
 	Lists   []*todolist.TodoList
 }
 
-// imUser - внутреннее представление модели.
-type imUser struct {
-	ID      uint
-	Name    string
-	PwdHash string
-}
-
 // Хранилище моделей в памяти.
-var imStorage = make(map[uint]*imUser)
-var key uint
-
-// Формутирует внутреннее представление модели во внешнее.
-func (u *imUser) format() *User {
-	return &User{
-		ID:      u.ID,
-		Name:    u.Name,
-		PwdHash: u.PwdHash,
-		Lists:   todolist.FindByUser(u.ID),
-	}
-}
-
-// Преобразует внешнее представление во внутреннее.
-func (u *User) zip() *imUser {
-	return &imUser{
-		ID:      u.ID,
-		Name:    u.Name,
-		PwdHash: u.PwdHash,
-	}
-}
 
 func validateName(name string) bool {
-	for _, v := range imStorage {
-		if v.Name == name {
-			return false
-		}
-	}
-	return true
+	err := models.DB.Where("name = ?", name).First(&User{}).Error
+	return err != nil
 }
 
 // Register добавляет нового пользователя в базу, и возвращает его структуру,
@@ -79,16 +49,11 @@ func Register(name string, password string) (*User, error) {
 		Name:    name,
 		PwdHash: fmt.Sprintf("%x", hash),
 	}
-	record.save()
-	return record, nil
-}
-
-func (u *User) save() {
-	key++
-	if u.ID == 0 {
-		u.ID = key
-		imStorage[u.ID] = u.zip()
+	err := models.DB.Save(record).Error
+	if err != nil {
+		return nil, err
 	}
+	return record, nil
 }
 
 // Login выполняет авторизацию пользователей.
@@ -97,14 +62,9 @@ func (u *User) save() {
 // а вторым true. В противном случае - nil и false.
 // Login перезапишет старые данные об авторизации, если таковые имеются.
 func Login(c *gin.Context, name string, password string) (*User, bool) {
-	user := (*User)(nil)
-	for _, u := range imStorage {
-		if u.Name == name {
-			user = u.format()
-			break
-		}
-	}
-	if user == nil {
+	user := &User{}
+	err := models.DB.Where("name = ?", name).First(user).Error
+	if err != nil {
 		return nil, false
 	}
 	hash := sha1.Sum([]byte(password))
@@ -132,11 +92,12 @@ func FromContext(c *gin.Context) (*User, bool) {
 		return nil, false
 	}
 	userid := uint(st.GetInt("user_id"))
-	userSes, ok := imStorage[userid]
-	if !ok {
+	user := &User{}
+	err := models.DB.Find(user, userid).Error
+	if err != nil {
 		return nil, false
 	}
-	return userSes.format(), true
+	return user, true
 }
 
 // AutoLogin запишет факт авторизации в сессию пользователя.
@@ -148,8 +109,9 @@ func (u *User) AutoLogin(c *gin.Context) {
 
 // Destroy стирает данные о пользователе из базы данных.
 func (u *User) Destroy() {
-	delete(imStorage, u.ID)
-	for _, v := range u.Lists {
-		v.Destroy()
-	}
+	models.DB.Delete(u)
+}
+
+func init() {
+	models.DB.AutoMigrate(&User{})
 }
