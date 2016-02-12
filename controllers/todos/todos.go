@@ -38,7 +38,10 @@ func CreateList(c *gin.Context) {
 	l.UserID = u.ID
 	err := l.Save()
 	if err != nil {
-		c.String(http.StatusOK, err.Error())
+		ctl.RenderHTML(c, "todos_index.tmpl", gin.H{
+			"Lists":      u.Lists,
+			"AlertError": err.Error(),
+		})
 		return
 	}
 	ctl.Redirect(c, l.Path())
@@ -52,8 +55,10 @@ func ShowList(c *gin.Context) {
 	if !ok {
 		return
 	}
+	u, _ := user.FromContext(c)
 	ctl.RenderHTML(c, "todos_show.tmpl", gin.H{
-		"List": l,
+		"List":  l,
+		"Lists": u.Lists,
 	})
 }
 
