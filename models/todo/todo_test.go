@@ -3,8 +3,16 @@ package todo
 import (
 	"fmt"
 	"math/rand"
+	"os"
 	"testing"
+
+	"github.com/13pinj/todoapp/models"
 )
+
+func TestMain(m *testing.M) {
+	models.DB.LogMode(false)
+	os.Exit(m.Run())
+}
 
 func TestNew(t *testing.T) {
 	lbl1 := "First todo"

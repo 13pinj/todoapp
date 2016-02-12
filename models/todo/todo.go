@@ -1,10 +1,15 @@
 package todo
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/13pinj/todoapp/models"
+	"github.com/jinzhu/gorm"
+)
 
 // Todo - это cтруктура одного "дела".
 type Todo struct {
-	ID uint
+	gorm.Model
 	// Статус выполнения дела.
 	Done bool
 	// Краткое описание дела.
@@ -12,9 +17,6 @@ type Todo struct {
 	// ID списка дел, которому принадлежит Todo
 	TodoListID uint
 }
-
-var st = make(map[uint]*Todo)
-var key uint
 
 // New создает новый экземпляр Todo, но не сохраняет его.
 // Сохранение должно производиться с помощью функции Todo.Save().
@@ -25,35 +27,23 @@ func New(l string) *Todo {
 	return &record
 }
 
-func stCopy(t *Todo) *Todo {
-	return &Todo{
-		ID:         t.ID,
-		Done:       t.Done,
-		Label:      t.Label,
-		TodoListID: t.TodoListID,
-	}
-}
-
 // Find возвращает Todo, сохраненный в базе и имеющий заданный id.
 // В случае если Todo не был найден, Find вернет вторым значением false.
 // В случае успеха, второе возвращаемое значение будет true.
 func Find(id uint) (*Todo, bool) {
-	record, ok := st[id]
-	if ok {
-		return stCopy(record), true
+	t := &Todo{}
+	err := models.DB.Find(t, id).Error
+	if err != nil {
+		return nil, false
 	}
-	return nil, false
+	return t, true
 }
 
 // FindByList возвращает все Todo в базе, связанные со списком,
 // имеющим заданный ID.
 func FindByList(listid uint) []*Todo {
 	slice := []*Todo{}
-	for _, v := range st {
-		if v.TodoListID == listid {
-			slice = append(slice, v)
-		}
-	}
+	models.DB.Where("todo_list_id = ?", listid).Find(&slice)
 	return slice
 }
 
@@ -66,19 +56,21 @@ func (t *Todo) Save() error {
 	if t.Label == "" {
 		return errors.New("Текст задания не должен быть пустым")
 	}
-	if t.ID == 0 {
-		key++
-		t.ID = key
-		st[t.ID] = stCopy(t)
-	} else {
-		st[t.ID].Done = t.Done
-		st[t.ID].Label = t.Label
-		st[t.ID].TodoListID = t.TodoListID
+	err := models.DB.Save(t).Error
+	if err != nil {
+		return err
 	}
 	return nil
 }
 
 // Destroy удаляет структуры из базы.
 func (t *Todo) Destroy() {
-	delete(st, t.ID)
+	if models.DB.NewRecord(t) {
+		return
+	}
+	models.DB.Delete(t)
+}
+
+func init() {
+	models.DB.AutoMigrate(&Todo{})
 }
