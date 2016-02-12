@@ -324,7 +324,7 @@ func TestTodoList_Add(t *testing.T) {
 	}
 }
 
-func TestFindByList(t *testing.T) {
+func TestFindByUser(t *testing.T) {
 	type findMap map[uint]bool
 	testUsers := make(map[uint]findMap)
 
