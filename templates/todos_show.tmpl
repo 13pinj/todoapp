@@ -1,4 +1,18 @@
 {{template "header" .}}
+<a href="/">Назад на главную</a>
+<form action="/logout" method="post">
+  <p>{{.CurrentUser.Name}}</p>
+  <input type="submit" name="submit" value="Выход">
+</form>
+
+<ul>
+  {{range .Lists}}
+  <li>
+    <a href="{{.Path}}">{{.Title}}</a>
+  </li>
+  {{end}}
+</ul>
+
 <input type="text" class="todolist-title" name="title" value="{{.List.Title}}" data-id="{{.List.ID}}">
 <ul>
   {{range .List.Todos}}
