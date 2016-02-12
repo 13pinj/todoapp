@@ -27,11 +27,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="643.35359"
-     inkscape:cy="357.2394"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="1331.5211"
+     inkscape:cy="-3.5144667"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g6328"
      showgrid="false"
      inkscape:snap-page="false"
      borderlayer="false"
@@ -45,7 +45,8 @@
      inkscape:window-maximized="1"
      inkscape:snap-bbox="true"
      inkscape:bbox-paths="true"
-     inkscape:object-paths="true" />
+     inkscape:object-paths="true"
+     inkscape:snap-global="false" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -582,339 +583,335 @@
            style="font-style:italic;font-variant:normal;font-stretch:normal;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light Italic">Нижняя граница блока формы</tspan></text>
     </g>
     <g
-       id="g6177"
+       id="g6169"
+       transform="translate(-64,0)">
+      <text
+         sodipodi:linespacing="125%"
+         id="text3763"
+         y="342.7688"
+         x="358.61462"
+         style="font-size:30.81390572px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#d3d4d8;fill-opacity:1;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#d3d4d8;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Bold"
+           y="342.7688"
+           x="358.61462"
+           id="tspan3765"
+           sodipodi:role="line">TodoApp</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text4616"
+         y="339.27502"
+         x="811.10266"
+         style="font-size:19.38150024px;font-style:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#d3d4d8;fill-opacity:0.5;stroke:none;font-family:Sans;-inkscape-font-specification:Roboto Semi-Light"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-stretch:normal;fill:#d3d4d8;fill-opacity:0.5;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light"
+           y="339.27502"
+           x="811.10266"
+           id="tspan4618"
+           sodipodi:role="line">bgeyts667</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:19.38150024px;font-style:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;color:#000000;fill:#d3d4d8;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Roboto Semi-Light"
+         x="913.10266"
+         y="339.27502"
+         id="text4626"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan4628"
+           x="913.10266"
+           y="339.27502"
+           style="font-style:normal;font-variant:normal;font-stretch:normal;color:#000000;fill:#d3d4d8;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light">Выйти</tspan></text>
+    </g>
+    <g
+       id="g3759"
+       transform="matrix(1.380543,0,0,1.0632925,-421.58686,-174.68317)">
+      <rect
+         ry="6.8269186"
+         y="525.06256"
+         x="519.21838"
+         height="329.30972"
+         width="442.99026"
+         id="rect3755"
+         style="color:#000000;fill:#a0a0a0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         rx="5.2580843" />
+      <rect
+         rx="5.2580843"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect3757"
+         width="442.99026"
+         height="329.30972"
+         x="519.21838"
+         y="521.06256"
+         ry="6.8269186" />
+    </g>
+    <g
+       id="g6105"
        transform="translate(-64,0)">
       <g
-         id="g6169">
+         transform="translate(-200.00195,-165.70381)"
+         id="g3818">
+        <rect
+           style="color:#000000;fill:#d3d4d8;fill-opacity:0.63333333;fill-rule:nonzero;stroke:none;stroke-width:1.25;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="rect3777"
+           width="458.10025"
+           height="50.81567"
+           x="570.92792"
+           y="556.56653"
+           rx="5"
+           ry="5" />
         <text
            xml:space="preserve"
-           style="font-size:30.81390572px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#d3d4d8;fill-opacity:1;stroke:none;font-family:Sans"
-           x="358.61462"
-           y="342.7688"
-           id="text3763"
+           style="font-size:17.10569191px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans"
+           x="590.43011"
+           y="587.97137"
+           id="text3781"
            sodipodi:linespacing="125%"><tspan
              sodipodi:role="line"
-             id="tspan3765"
-             x="358.61462"
-             y="342.7688"
-             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#d3d4d8;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Bold">TodoApp</tspan></text>
-        <text
-           xml:space="preserve"
-           style="font-size:19.38150024px;font-style:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#d3d4d8;fill-opacity:0.5;stroke:none;font-family:Sans;-inkscape-font-specification:Roboto Semi-Light"
-           x="811.10266"
-           y="339.27502"
-           id="text4616"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan4618"
-             x="811.10266"
-             y="339.27502"
-             style="font-style:normal;font-variant:normal;font-stretch:normal;fill:#d3d4d8;fill-opacity:0.5;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light">bgeyts667</tspan></text>
-        <text
-           sodipodi:linespacing="125%"
-           id="text4626"
-           y="339.27502"
-           x="913.10266"
-           style="font-size:19.38150024000000116px;font-style:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;color:#000000;fill:#d3d4d8;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25000000000000000;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Roboto Semi-Light"
-           xml:space="preserve"><tspan
-             style="font-style:normal;font-variant:normal;font-stretch:normal;color:#000000;fill:#d3d4d8;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25000000000000000;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light"
-             y="339.27502"
-             x="913.10266"
-             id="tspan4628"
-             sodipodi:role="line">Выйти</tspan></text>
+             id="tspan3783"
+             x="590.43011"
+             y="587.97137"
+             style="font-style:normal;font-variant:normal;font-stretch:normal;fill:#000000;fill-opacity:0.31428576;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light">Заголовок</tspan></text>
       </g>
       <g
-         id="g6115">
-        <g
-           id="g3759"
-           transform="matrix(1.380543,0,0,0.97419076,-357.58686,-128.25558)">
-          <rect
-             ry="7.4513245"
-             y="525.06256"
-             x="519.21838"
-             height="329.30972"
-             width="442.99026"
-             id="rect3755"
-             style="color:#000000;fill:#a0a0a0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-             rx="5.2580843" />
-          <rect
-             rx="5.2580843"
-             style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-             id="rect3757"
-             width="442.99026"
-             height="329.30972"
-             x="519.21838"
-             y="521.06256"
-             ry="7.4513245" />
-        </g>
-        <g
-           id="g6105">
-          <g
-             transform="translate(-200.00195,-165.70381)"
-             id="g3818">
-            <rect
-               style="color:#000000;fill:#d3d4d8;fill-opacity:0.63333333;fill-rule:nonzero;stroke:none;stroke-width:1.25;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-               id="rect3777"
-               width="458.10025"
-               height="50.81567"
-               x="570.92792"
-               y="556.56653"
-               rx="5"
-               ry="5" />
-            <text
-               xml:space="preserve"
-               style="font-size:17.10569191px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans"
-               x="590.43011"
-               y="587.97137"
-               id="text3781"
-               sodipodi:linespacing="125%"><tspan
-                 sodipodi:role="line"
-                 id="tspan3783"
-                 x="590.43011"
-                 y="587.97137"
-                 style="font-style:normal;font-variant:normal;font-stretch:normal;fill:#000000;fill-opacity:0.31428576;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light">Заголовок</tspan></text>
-          </g>
-          <g
-             transform="translate(146.99805,-288.70381)"
-             id="g3828">
-            <rect
-               style="color:#000000;fill:#3fbac2;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-               id="rect3806"
-               width="119.79695"
-               height="50.81567"
-               x="692.92792"
-               y="679.56653"
-               rx="5"
-               ry="5" />
-            <text
-               xml:space="preserve"
-               style="font-size:17.10569191px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Roboto Bold"
-               x="712.43011"
-               y="711.03253"
-               id="text3808"
-               sodipodi:linespacing="125%"><tspan
-                 sodipodi:role="line"
-                 id="tspan3810"
-                 x="712.43011"
-                 y="711.03253"
-                 style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffffff;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Bold">Добавить</tspan></text>
-          </g>
-        </g>
-        <path
-           style="color:#000000;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.50196078;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-           d="m 359.21645,454.36218 611.5671,0"
-           id="path5968"
-           inkscape:connector-curvature="0" />
-        <g
-           id="g6035">
-          <text
-             sodipodi:linespacing="125%"
-             id="text6010"
-             y="491.3588"
-             x="383.59009"
-             style="font-size:20px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans;-inkscape-font-specification:Roboto Bold"
-             xml:space="preserve"><tspan
-               style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#3fbac2;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Bold"
-               y="491.3588"
-               x="383.59009"
-               id="tspan6012"
-               sodipodi:role="line">Покупки</tspan></text>
-          <text
-             sodipodi:linespacing="125%"
-             id="text6016"
+         transform="translate(146.99805,-288.70381)"
+         id="g3828">
+        <rect
+           style="color:#000000;fill:#3fbac2;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="rect3806"
+           width="119.79695"
+           height="50.81567"
+           x="692.92792"
+           y="679.56653"
+           rx="5"
+           ry="5" />
+        <text
+           xml:space="preserve"
+           style="font-size:17.10569191px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Roboto Bold"
+           x="712.43011"
+           y="711.03253"
+           id="text3808"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3810"
+             x="712.43011"
+             y="711.03253"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffffff;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Bold">Добавить</tspan></text>
+      </g>
+    </g>
+    <path
+       style="color:#000000;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.50196078;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 295.21645,480.36218 611.5671,0"
+       id="path5968"
+       inkscape:connector-curvature="0" />
+    <g
+       id="g6035"
+       transform="translate(-64,26)">
+      <text
+         sodipodi:linespacing="125%"
+         id="text6010"
+         y="491.3588"
+         x="383.59009"
+         style="font-size:20px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans;-inkscape-font-specification:Roboto Bold"
+         xml:space="preserve"><tspan
+           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#3fbac2;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Bold"
+           y="491.3588"
+           x="383.59009"
+           id="tspan6012"
+           sodipodi:role="line">Покупки</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text6016"
+         y="491.56226"
+         x="470.74899"
+         style="font-size:14.86911583px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-stretch:normal;fill:#000000;fill-opacity:0.31428576;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light"
+           y="491.56226"
+           x="470.74899"
+           id="tspan6018"
+           sodipodi:role="line">(12/16)</tspan></text>
+      <g
+         transform="translate(40,0)"
+         id="g6028">
+        <text
+           sodipodi:linespacing="125%"
+           id="text6022"
+           y="491.56226"
+           x="850.74902"
+           style="font-size:14.86911583px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ec185d;fill-opacity:1;stroke:none;font-family:Sans"
+           xml:space="preserve"><tspan
+             style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-stretch:normal;fill:#ec185d;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light"
              y="491.56226"
-             x="470.74899"
-             style="font-size:14.86911583px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans"
-             xml:space="preserve"><tspan
-               style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-stretch:normal;fill:#000000;fill-opacity:0.31428576;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light"
-               y="491.56226"
-               x="470.74899"
-               id="tspan6018"
-               sodipodi:role="line">(12/16)</tspan></text>
-          <g
-             transform="translate(40,0)"
-             id="g6028">
-            <text
-               sodipodi:linespacing="125%"
-               id="text6022"
-               y="491.56226"
-               x="850.74902"
-               style="font-size:14.86911583px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ec185d;fill-opacity:1;stroke:none;font-family:Sans"
-               xml:space="preserve"><tspan
-                 style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-stretch:normal;fill:#ec185d;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light"
-                 y="491.56226"
-                 x="850.74902"
-                 id="tspan6024"
-                 sodipodi:role="line">Удалить</tspan></text>
-            <path
-               style="fill:none;stroke:#ec185d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.99607843;stroke-dasharray:3, 1;stroke-dashoffset:0"
-               d="m 852.24045,493.81369 55.3311,0"
-               id="path6026"
-               inkscape:connector-curvature="0" />
-          </g>
-        </g>
+             x="850.74902"
+             id="tspan6024"
+             sodipodi:role="line">Удалить</tspan></text>
+        <path
+           style="fill:none;stroke:#ec185d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.99607843;stroke-dasharray:3, 1;stroke-dashoffset:0"
+           d="m 852.24045,493.81369 55.3311,0"
+           id="path6026"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path6033"
+       d="m 295.21645,542.36218 611.5671,0"
+       style="color:#000000;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.25098039;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <g
+       id="g6045"
+       transform="translate(-64,88)">
+      <text
+         xml:space="preserve"
+         style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans"
+         x="383.59009"
+         y="491.3588"
+         id="text6047"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan6049"
+           x="383.59009"
+           y="491.3588"
+           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#3fbac2;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Bold">Дела по работе</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:14.86911583px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans"
+         x="536.74902"
+         y="491.56226"
+         id="text6051"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan6053"
+           x="536.74902"
+           y="491.56226"
+           style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-stretch:normal;fill:#000000;fill-opacity:0.31428576;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light">(1/7)</tspan></text>
+      <g
+         id="g6055"
+         transform="translate(40,0)">
+        <text
+           xml:space="preserve"
+           style="font-size:14.86911583px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ec185d;fill-opacity:1;stroke:none;font-family:Sans"
+           x="850.74902"
+           y="491.56226"
+           id="text6057"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan6059"
+             x="850.74902"
+             y="491.56226"
+             style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-stretch:normal;fill:#ec185d;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light">Удалить</tspan></text>
         <path
            inkscape:connector-curvature="0"
-           id="path6033"
-           d="m 359.21645,516.36218 611.5671,0"
-           style="color:#000000;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.25098039;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-        <g
-           id="g6045"
-           transform="translate(0,62)">
-          <text
-             xml:space="preserve"
-             style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans"
-             x="383.59009"
-             y="491.3588"
-             id="text6047"
-             sodipodi:linespacing="125%"><tspan
-               sodipodi:role="line"
-               id="tspan6049"
-               x="383.59009"
-               y="491.3588"
-               style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#3fbac2;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Bold">Дела по работе</tspan></text>
-          <text
-             xml:space="preserve"
-             style="font-size:14.86911583px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans"
-             x="536.74902"
+           id="path6061"
+           d="m 852.24045,493.81369 55.3311,0"
+           style="fill:none;stroke:#ec185d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.99607843;stroke-dasharray:3, 1;stroke-dashoffset:0" />
+      </g>
+    </g>
+    <path
+       style="color:#000000;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.25098039;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 295.21645,604.36218 611.5671,0"
+       id="path6063"
+       inkscape:connector-curvature="0" />
+    <g
+       transform="translate(-64,150)"
+       id="g6065">
+      <text
+         sodipodi:linespacing="125%"
+         id="text6067"
+         y="491.3588"
+         x="383.59009"
+         style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#3fbac2;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Bold"
+           y="491.3588"
+           x="383.59009"
+           id="tspan6069"
+           sodipodi:role="line">День рождения Игнатия</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text6071"
+         y="491.56226"
+         x="622.74902"
+         style="font-size:14.86911583px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-stretch:normal;fill:#000000;fill-opacity:0.31428576;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light"
+           y="491.56226"
+           x="622.74902"
+           id="tspan6073"
+           sodipodi:role="line">(0/3)</tspan></text>
+      <g
+         transform="translate(40,0)"
+         id="g6075">
+        <text
+           sodipodi:linespacing="125%"
+           id="text6077"
+           y="491.56226"
+           x="850.74902"
+           style="font-size:14.86911583px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ec185d;fill-opacity:1;stroke:none;font-family:Sans"
+           xml:space="preserve"><tspan
+             style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-stretch:normal;fill:#ec185d;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light"
              y="491.56226"
-             id="text6051"
-             sodipodi:linespacing="125%"><tspan
-               sodipodi:role="line"
-               id="tspan6053"
-               x="536.74902"
-               y="491.56226"
-               style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-stretch:normal;fill:#000000;fill-opacity:0.31428576;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light">(1/7)</tspan></text>
-          <g
-             id="g6055"
-             transform="translate(40,0)">
-            <text
-               xml:space="preserve"
-               style="font-size:14.86911583px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ec185d;fill-opacity:1;stroke:none;font-family:Sans"
-               x="850.74902"
-               y="491.56226"
-               id="text6057"
-               sodipodi:linespacing="125%"><tspan
-                 sodipodi:role="line"
-                 id="tspan6059"
-                 x="850.74902"
-                 y="491.56226"
-                 style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-stretch:normal;fill:#ec185d;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light">Удалить</tspan></text>
-            <path
-               inkscape:connector-curvature="0"
-               id="path6061"
-               d="m 852.24045,493.81369 55.3311,0"
-               style="fill:none;stroke:#ec185d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.99607843;stroke-dasharray:3, 1;stroke-dashoffset:0" />
-          </g>
-        </g>
+             x="850.74902"
+             id="tspan6079"
+             sodipodi:role="line">Удалить</tspan></text>
         <path
-           style="color:#000000;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.25098039;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-           d="m 359.21645,578.36218 611.5671,0"
-           id="path6063"
+           style="fill:none;stroke:#ec185d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.99607843;stroke-dasharray:3, 1;stroke-dashoffset:0"
+           d="m 852.24045,493.81369 55.3311,0"
+           id="path6081"
            inkscape:connector-curvature="0" />
-        <g
-           transform="translate(0,124)"
-           id="g6065">
-          <text
-             sodipodi:linespacing="125%"
-             id="text6067"
-             y="491.3588"
-             x="383.59009"
-             style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans"
-             xml:space="preserve"><tspan
-               style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#3fbac2;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Bold"
-               y="491.3588"
-               x="383.59009"
-               id="tspan6069"
-               sodipodi:role="line">День рождения Игнатия</tspan></text>
-          <text
-             sodipodi:linespacing="125%"
-             id="text6071"
+      </g>
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path6083"
+       d="m 295.21645,666.36218 611.5671,0"
+       style="color:#000000;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.25098039;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <g
+       id="g6085"
+       transform="translate(-64,212)">
+      <text
+         xml:space="preserve"
+         style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans"
+         x="383.59009"
+         y="491.3588"
+         id="text6087"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan6089"
+           x="383.59009"
+           y="491.3588"
+           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#3fbac2;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Bold">Экзамены</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:14.86911583px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans"
+         x="490.74902"
+         y="491.56226"
+         id="text6091"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan6093"
+           x="490.74902"
+           y="491.56226"
+           style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-stretch:normal;fill:#000000;fill-opacity:0.31428576;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light">(5/6)</tspan></text>
+      <g
+         id="g6095"
+         transform="translate(40,0)">
+        <text
+           xml:space="preserve"
+           style="font-size:14.86911583px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ec185d;fill-opacity:1;stroke:none;font-family:Sans"
+           x="850.74902"
+           y="491.56226"
+           id="text6097"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan6099"
+             x="850.74902"
              y="491.56226"
-             x="622.74902"
-             style="font-size:14.86911583px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans"
-             xml:space="preserve"><tspan
-               style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-stretch:normal;fill:#000000;fill-opacity:0.31428576;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light"
-               y="491.56226"
-               x="622.74902"
-               id="tspan6073"
-               sodipodi:role="line">(0/3)</tspan></text>
-          <g
-             transform="translate(40,0)"
-             id="g6075">
-            <text
-               sodipodi:linespacing="125%"
-               id="text6077"
-               y="491.56226"
-               x="850.74902"
-               style="font-size:14.86911583px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ec185d;fill-opacity:1;stroke:none;font-family:Sans"
-               xml:space="preserve"><tspan
-                 style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-stretch:normal;fill:#ec185d;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light"
-                 y="491.56226"
-                 x="850.74902"
-                 id="tspan6079"
-                 sodipodi:role="line">Удалить</tspan></text>
-            <path
-               style="fill:none;stroke:#ec185d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.99607843;stroke-dasharray:3, 1;stroke-dashoffset:0"
-               d="m 852.24045,493.81369 55.3311,0"
-               id="path6081"
-               inkscape:connector-curvature="0" />
-          </g>
-        </g>
+             style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-stretch:normal;fill:#ec185d;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light">Удалить</tspan></text>
         <path
            inkscape:connector-curvature="0"
-           id="path6083"
-           d="m 359.21645,640.36218 611.5671,0"
-           style="color:#000000;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.25098039;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-        <g
-           id="g6085"
-           transform="translate(0,186)">
-          <text
-             xml:space="preserve"
-             style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans"
-             x="383.59009"
-             y="491.3588"
-             id="text6087"
-             sodipodi:linespacing="125%"><tspan
-               sodipodi:role="line"
-               id="tspan6089"
-               x="383.59009"
-               y="491.3588"
-               style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#3fbac2;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Bold">Экзамены</tspan></text>
-          <text
-             xml:space="preserve"
-             style="font-size:14.86911583px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.31428576;stroke:none;font-family:Sans"
-             x="490.74902"
-             y="491.56226"
-             id="text6091"
-             sodipodi:linespacing="125%"><tspan
-               sodipodi:role="line"
-               id="tspan6093"
-               x="490.74902"
-               y="491.56226"
-               style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-stretch:normal;fill:#000000;fill-opacity:0.31428576;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light">(5/6)</tspan></text>
-          <g
-             id="g6095"
-             transform="translate(40,0)">
-            <text
-               xml:space="preserve"
-               style="font-size:14.86911583px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ec185d;fill-opacity:1;stroke:none;font-family:Sans"
-               x="850.74902"
-               y="491.56226"
-               id="text6097"
-               sodipodi:linespacing="125%"><tspan
-                 sodipodi:role="line"
-                 id="tspan6099"
-                 x="850.74902"
-                 y="491.56226"
-                 style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-stretch:normal;fill:#ec185d;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light">Удалить</tspan></text>
-            <path
-               inkscape:connector-curvature="0"
-               id="path6101"
-               d="m 852.24045,493.81369 55.3311,0"
-               style="fill:none;stroke:#ec185d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.99607843;stroke-dasharray:3, 1;stroke-dashoffset:0" />
-          </g>
-        </g>
+           id="path6101"
+           d="m 852.24045,493.81369 55.3311,0"
+           style="fill:none;stroke:#ec185d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.99607843;stroke-dasharray:3, 1;stroke-dashoffset:0" />
       </g>
     </g>
     <g
@@ -1067,7 +1064,19 @@
            id="tspan6338"
            x="1205.6399"
            y="325.61917"
-           style="font-style:italic;font-variant:normal;font-stretch:normal;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light Italic">Ссылка ну удаление</tspan></text>
+           style="font-style:italic;font-variant:normal;font-stretch:normal;font-family:Roboto;-inkscape-font-specification:Roboto Semi-Light Italic">Ошибка и ссылка ну удаление</tspan></text>
     </g>
+    <text
+       xml:space="preserve"
+       style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ec185d;fill-opacity:1;fill-rule:nonzero;stroke:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Roboto;-inkscape-font-specification:Roboto Bold"
+       x="306.52252"
+       y="464.24939"
+       id="text8019"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan8021"
+         x="306.52252"
+         y="464.24939"
+         style="font-size:14.86911583px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ec185d;fill-opacity:1;fill-rule:nonzero;stroke:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Roboto;-inkscape-font-specification:Roboto Bold">Ошибка при добавлении списка</tspan></text>
   </g>
 </svg>
