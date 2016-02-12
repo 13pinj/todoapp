@@ -20,6 +20,7 @@ func Index(c *gin.Context) {
 		ctl.Redirect(c, "/")
 		return
 	}
+	u.LoadLists()
 	ctl.RenderHTML(c, "todos_index.tmpl", gin.H{
 		"Lists": u.Lists,
 	})
@@ -38,6 +39,7 @@ func CreateList(c *gin.Context) {
 	l.UserID = u.ID
 	err := l.Save()
 	if err != nil {
+		u.LoadLists()
 		ctl.RenderHTML(c, "todos_index.tmpl", gin.H{
 			"Lists":      u.Lists,
 			"AlertError": err.Error(),
@@ -56,6 +58,8 @@ func ShowList(c *gin.Context) {
 		return
 	}
 	u, _ := user.FromContext(c)
+	u.LoadLists()
+	l.LoadTodos()
 	ctl.RenderHTML(c, "todos_show.tmpl", gin.H{
 		"List":  l,
 		"Lists": u.Lists,
@@ -106,6 +110,8 @@ func CreateTask(c *gin.Context) {
 	err := l.Add(c.PostForm("label"))
 	if err != nil {
 		u, _ := user.FromContext(c)
+		u.LoadLists()
+		l.LoadTodos()
 		ctl.RenderHTML(c, "todos_show.tmpl", gin.H{
 			"List":       l,
 			"AlertError": err.Error(),

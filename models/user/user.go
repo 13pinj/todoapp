@@ -21,7 +21,12 @@ type User struct {
 	Lists   []*todolist.TodoList
 }
 
-// Хранилище моделей в памяти.
+func (u *User) LoadLists() {
+	if u.Lists != nil {
+		return
+	}
+	u.Lists = todolist.FindByUser(u.ID)
+}
 
 func validateName(name string) bool {
 	err := models.DB.Where("name = ?", name).First(&User{}).Error

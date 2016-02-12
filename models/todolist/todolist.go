@@ -20,6 +20,13 @@ type TodoList struct {
 	UserID uint
 }
 
+func (l *TodoList) LoadTodos() {
+	if l.Todos != nil {
+		return
+	}
+	l.Todos = todo.FindByList(l.ID)
+}
+
 // New создает новый экземпляр TodoList, но не сохраняет его.
 // Сохранение должно производиться с помощью функции TodoList.Save().
 func New(t string) *TodoList {
@@ -77,11 +84,13 @@ func (l *TodoList) Destroy() {
 
 // Len возвращает количество всех дел в списке.
 func (l *TodoList) Len() int {
+	l.LoadTodos()
 	return len(l.Todos)
 }
 
 // LenUndone возвращает количество незавершенных дел в списке.
 func (l *TodoList) LenUndone() int {
+	l.LoadTodos()
 	k := 0
 	for _, v := range l.Todos {
 		if !v.Done {
@@ -93,6 +102,7 @@ func (l *TodoList) LenUndone() int {
 
 // LenDone возвращает количество завершенных дел в списке.
 func (l *TodoList) LenDone() int {
+	l.LoadTodos()
 	k := 0
 	for _, v := range l.Todos {
 		if v.Done {
@@ -121,6 +131,7 @@ func (l *TodoList) Add(lbl string) error {
 
 // Undone возвращает список незавершенных дел.
 func (l *TodoList) Undone() []*todo.Todo {
+	l.LoadTodos()
 	slice := []*todo.Todo{}
 	for _, v := range l.Todos {
 		if !v.Done {
@@ -132,6 +143,7 @@ func (l *TodoList) Undone() []*todo.Todo {
 
 // Done возвращает список завершенных дел.
 func (l *TodoList) Done() []*todo.Todo {
+	l.LoadTodos()
 	slice := []*todo.Todo{}
 	for _, v := range l.Todos {
 		if v.Done {
