@@ -20,6 +20,7 @@ type TodoList struct {
 	UserID uint
 }
 
+// LoadTodos загружает из базы задания списка в поле Todos
 func (l *TodoList) LoadTodos() {
 	if l.Todos != nil {
 		return

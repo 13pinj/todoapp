@@ -21,6 +21,7 @@ type User struct {
 	Lists   []*todolist.TodoList
 }
 
+// LoadLists загружает из базы списки дел пользователя в поле Lists
 func (u *User) LoadLists() {
 	if u.Lists != nil {
 		return
