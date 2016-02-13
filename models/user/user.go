@@ -35,30 +35,33 @@ func validateName(name string) bool {
 
 // Register добавляет нового пользователя в базу, и возвращает его структуру,
 // если введенные поля корректны. В противном случае Register возвращает ошибку.
-func Register(name string, password string) (*User, error) {
+func Register(name string, password string) (u *User, errs []error) {
 	ok := strings.Contains(name, " ")
 	if ok {
-		return nil, errors.New("Пробел в имени запрещен")
+		errs = append(errs, errors.New("Пробел в имени запрещен"))
 	}
 	if len([]rune(name)) < 4 {
-		return nil, errors.New("Имя слишком короткое (минимум 4 символов)")
+		errs = append(errs, errors.New("Имя слишком короткое (минимум 4 символа)"))
 	}
 	if len([]rune(password)) < 6 {
-		return nil, errors.New("Пароль слишком короткий (минимум 6 символов)")
+		errs = append(errs, errors.New("Пароль слишком короткий (минимум 6 символов)"))
 	}
 	if !validateName(name) {
-		return nil, errors.New("Имя кем-то занято")
+		errs = append(errs, errors.New("Имя кем-то занято"))
+	}
+	if errs != nil {
+		return
 	}
 	hash := sha1.Sum([]byte(password))
-	record := &User{
+	u = &User{
 		Name:    name,
 		PwdHash: fmt.Sprintf("%x", hash),
 	}
-	err := models.DB.Save(record).Error
+	err := models.DB.Save(u).Error
 	if err != nil {
-		return nil, err
+		errs = append(errs, err)
 	}
-	return record, nil
+	return
 }
 
 // Login выполняет авторизацию пользователей.

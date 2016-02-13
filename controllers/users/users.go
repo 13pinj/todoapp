@@ -26,9 +26,9 @@ func Register(c *gin.Context) {
 	}
 	name := c.PostForm("name")
 	pas := c.PostForm("password")
-	us, err := user.Register(name, pas)
-	if err != nil {
-		ctl.RenderHTML(c, "register.tmpl", gin.H{"Errors": []string{err.Error()}})
+	us, errs := user.Register(name, pas)
+	if errs != nil {
+		ctl.RenderHTML(c, "register.tmpl", gin.H{"Errors": errs})
 		return
 	}
 	us.AutoLogin(c)
