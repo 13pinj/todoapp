@@ -1,0 +1,308 @@
+ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+h1, h2{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	margin: 0;
+	font-family: 'Roboto';
+	background-color: rgb(77, 96, 110);
+}
+
+/*#wrapper {
+	width: 1200px;
+	margin: 0 auto;	
+	}*/
+
+	#l-collumn{
+		padding: 45px 0 0 35px;
+		float: left;
+		width: 410px;
+	}
+
+	#r-collumn{
+		background-color: #fff;
+		float: left;
+		position: absolute;
+		left: 445px;
+		right: 0;
+		height: 100%;
+	}	
+
+	#logout-button{
+		cursor: pointer;
+		box-shadow: none;
+		background: none;
+		border: none;
+		color: rgb(211, 212, 216);
+		padding: 0;
+		padding-left: 10px;
+	}
+
+	#back-to-index{
+	}
+
+	#login-button:hover{
+		text-decoration: underline;
+	}
+
+	#user-name{
+		color: rgba(211, 212, 216, 0.5);
+		float: left;
+		margin: 0;
+	}
+
+	#logout-form{
+		float: right;
+		margin-right: 35px;
+	}
+
+	#login, #register, #index{
+		position: relative;
+		top: 150px;
+		width: 320px;
+		height: 270px;
+		margin: 0 auto;
+	}
+
+	#index{
+		width: 610px;
+		top: 0;
+	}
+
+	#login-header, #register-header, #index-header{
+		height: 64px;
+	}
+
+	#logo{
+		width: 127px;
+		float: left;
+		color: rgb(211, 212, 216);
+	}
+
+	#index-header-right{
+		margin-left: 127px;
+		text-align: right;
+		width: 483px;
+		padding-top: 18px;
+	}
+
+	#login h2, #register h2, #index h2{
+		float: left;
+		padding-top: 18px;
+		padding-left: 8px;
+		color: rgba(211, 212, 216, 0.5);
+		font-size: 16px;
+	}
+
+	#login-form, #register-form, #add-list-form, #title-list-form{
+		padding-top: 10px;
+		background-color: #fff;
+		border-radius: 5px;
+		color: rgba(0, 0, 0, 0.31);
+		border-bottom: 4px solid rgb(160, 160, 160);
+	}
+
+	#title-list-form{
+		width: 370px;
+		margin-top: 40px;
+		padding-top: 0;
+	}
+
+	.title-editable{
+		border: none;
+		margin: 0;
+		padding: 0;
+		margin: 20px 0 15px 64px;
+		color: rgba(0, 0, 0, 0.31);
+		font-size: 26px;
+
+	}
+
+	.to-do-editable{
+		width: 400px;
+		border: none;
+		padding: 0;
+		margin: 20px 0 0 10px;
+		margin-top: 20px;
+		margin-left: 10px;
+		color: rgba(0, 0, 0, 0.75);
+		font-size: 22px;
+	}
+
+	.text-field{
+		width: 280px;
+		border-style: none;
+		height: 50px;
+		margin: 0px 0 10px 10px;
+		padding-left: 18px;
+		background-color: rgba(211, 212, 216, 0.63);
+		border-radius: 5px;
+		color: rgba(0, 0, 0, 0.63);
+	}
+
+	.text-field-home{
+
+		width: 441px;
+		float: left;
+	}
+
+	.text-field-list{
+		margin-left: 0;
+		width: 351px;
+		height: 50px;
+	}
+
+.delete-list-item{
+	float: none;
+	visibility: hidden;
+}
+
+	.todo:hover .delete-list-item{
+		float: none;
+		visibility: visible;
+	}
+
+	.errors{
+		font-size: 12px;
+		color: rgb(236, 24, 93); 
+		width: 100%;
+		padding-left: 0px;
+		margin: 0px 0px 0px 15px;
+		font-weight: bold;
+	}
+
+	.errors li{
+		margin-bottom: 5px;
+	}
+
+	.errors-home{
+		width: 450px;
+		margin: 0 0 10px 12px;
+	}
+
+	.errors-list-show{
+		margin-left: 10px;
+	}
+
+	input[type=checkbox]:checked{
+		border: none;
+		box-shadow: none;
+		background: none;
+	}
+
+	.button{
+		font-weight: 600;
+		cursor: pointer;
+		margin: 0 0 0 10px;
+		box-shadow: none;
+		border-radius: 5px;
+		height: 50px;
+		width: 90px;
+		border: none;
+		background-color: rgb(63, 186, 194);
+		color: #fff;
+	}
+
+	.button:hover{
+		background-color: rgb(113, 204, 210);
+	}
+
+	.register-button{
+		width: 205px;
+		margin-bottom: 10px;
+	}
+
+	.login-btn{
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	.button-add-list{
+		width: 120px;
+	}
+
+	.to-do-add-btn{
+		width: 120px;
+	}
+
+{
+	width: 20px;
+}
+
+#none-lists{
+	padding-left: 0;
+	text-align: center;
+}
+
+.todolist, .title-list-item{
+	padding-left: 25px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid rgb(223, 223, 223);
+	padding-top: 20px;
+}
+
+.todo{
+	margin-left: 64px;
+}
+
+.title-list-item{
+}
+
+.to-do-add-form{
+	margin: 30px 0 0 64px;
+}
+
+a{
+	font-size: 16px;
+	/*font-weight: bold;*/
+	text-decoration: none;
+
+	color: rgb(63, 186, 194);
+}
+
+a:hover{
+	text-decoration: underline;
+}
+
+
+.delete-list-btn{
+	float: right;
+	margin-right: 10px;
+	background: none;
+	border: none;
+	color: rgb(236, 24, 93);
+	padding: 0;
+	border-bottom: 2px dotted rgb(236, 24, 93);
+	cursor: pointer;
+}
+
+.delete-list-btn{
+	visibility: hidden;
+}
+
+.todolist:hover .delete-list-btn{
+	visibility: visible;
+}
+
+#list-create-form{
+	padding-bottom: 14px;
+}
+
+.show-page-links{
+	color: rgb(211, 212, 216);
+}
+
+#l-collumn-header a, #l-collumn-header p, #l-collumn-header input{
+	font-size: 14px;
+}
+
+span{
+	padding-left: 5px;
+}

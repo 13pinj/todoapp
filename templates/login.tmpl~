@@ -1,0 +1,24 @@
+{{template "header" .}}
+<<<<<<< Updated upstream
+<h1>TodoApp</h1>
+<h2>Списки дел</h2>
+<form action="/login" method="post">
+=======
+<ul style="color:darkred;">
+  {{range .Errors}}
+  <li>{{.}}</li>
+  {{end}}
+</ul>
+<form id="login-form" action="/login" method="post">
+>>>>>>> Stashed changes
+  <input type="text" name="name" value=""><br>
+  <input type="password" name="password" value=""><br>
+  <ul style="color:darkred;">
+    {{range .Errors}}
+    <li>{{.}}</li>
+    {{end}}
+  </ul>
+  <input type="submit" name="submit" value="Войти">
+  или <a href="/register">Зарегистрироваться</a>
+</form>
+{{template "footer" .}}

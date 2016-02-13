@@ -1,34 +1,44 @@
 {{template "header" .}}
-<a href="/">Назад на главную</a>
-<form action="/logout" method="post">
-  <p>{{.CurrentUser.Name}}</p>
-  <input type="submit" name="submit" value="Выход">
-</form>
-<ul>
-  {{range .Lists}}
-  <li>
-    <a href="{{.Path}}">{{.Title}}</a>
-  </li>
-  {{end}}
-</ul>
+<div id="l-collumn">
+  <div id="l-collumn-header">
+    <a class="show-page-links" id="back-to-index" href="/">Назад на главную</a>
+    <form id="logout-form" action="/logout" method="post">
+      <p id="user-name">{{.CurrentUser.Name}}</p>
+      <input class="show-page-links" id="logout-button" type="submit" name="submit" value="Выход">
+    </form>
+  </div>
 
-<input type="text" class="todolist-title" name="title" value="{{.List.Title}}" data-id="{{.List.ID}}">
-<p style="color:red;font-weight:bold;" id="error-alert">
-  {{if .AlertError}}{{.AlertError}}{{end}}
-</p>
-<ul>
-  {{range .List.Todos}}
-  <li class="todo" data-id="{{.ID}}">
-    <input type="checkbox" name="done" {{if .Done}}checked{{end}}>
-    <input type="text" name="label" value="{{.Label}}">
-    <button type="button" name="button" class="delete">X</button>
-  </li>
-  {{else}}
-  <li><i>Дел нет</i></li>
-  {{end}}
-</ul>
-<form action="{{.List.Path}}/add" method="post">
-  <input type="text" name="label" value="">
-  <input type="submit" name="submit" value="Добавить">
-</form>
+  <div id="title-list-form">
+    <ul>
+      {{range .Lists}}
+      <li class="title-list-item">
+        <a href="{{.Path}}">{{.Title}}</a>
+      </li>
+      {{end}}
+    </ul>
+  </div>
+</div>
+
+<div id="r-collumn">
+  <input type="text" autocomplete="off" class="todolist-title title-editable" name="title" value="{{.List.Title}}" data-id="{{.List.ID}}">
+  <p class="errors errors-list-show" id="error-alert" >
+    {{if .AlertError}}{{.AlertError}}{{end}}
+  </p>
+  <ul>
+    {{range .List.Todos}}
+    <li class="todo" data-id="{{.ID}}">
+      <input class="to-do-checkbo" type="checkbox" name="done" {{if .Done}}checked{{end}}>
+      <label for="to-do-checkbo"></label>
+      <input class="to-do-editable" autocomplete="off" type="text" placeholder="Задание" name="label" value="{{.Label}}" >
+      <button type="button" name="button" class="delete delete-list-btn delete-list-item">Удалить</button>
+    </li>
+    {{else}}
+    <li><i>Дел нет</i></li>
+    {{end}}
+  </ul>
+  <form class="to-do-add-form" action="{{.List.Path}}/add" method="post">
+    <input class="text-field text-field-list" type="text" name="label" value="">
+    <input class="button to-do-add-btn" type="submit" name="submit" value="Добавить">
+  </form>
+</div>
 {{template "footer" .}}
