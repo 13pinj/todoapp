@@ -3,7 +3,7 @@
   <div id="l-collumn-header">
     <a class="show-page-links" id="back-to-index" href="/">Назад на главную</a>
     <form id="logout-form" action="/logout" method="post">
-      <p id="user-name">{{.CurrentUser.Name}}</p>
+      <p class="user-name user-name-show">{{.CurrentUser.Name}}</p>
       <input class="show-page-links" id="logout-button" type="submit" name="submit" value="Выход">
     </form>
   </div>
@@ -27,17 +27,17 @@
   <ul>
     {{range .List.Todos}}
     <li class="todo" data-id="{{.ID}}">
-      <input class="to-do-checkbo" type="checkbox" name="done" {{if .Done}}checked{{end}}>
-      <label for="to-do-checkbo"></label>
+      
+      <input class="to-do-checkbox" type="checkbox" name="done" {{if .Done}}checked{{end}}>
       <input class="to-do-editable" autocomplete="off" type="text" placeholder="Задание" name="label" value="{{.Label}}" >
-      <button type="button" name="button" class="delete delete-list-btn delete-list-item">Удалить</button>
+      <button type="button" name="button" class="delete delete-list-item">Удалить</button>
     </li>
     {{else}}
     <li><i>Дел нет</i></li>
     {{end}}
   </ul>
   <form class="to-do-add-form" action="{{.List.Path}}/add" method="post">
-    <input class="text-field text-field-list" type="text" name="label" value="">
+    <input class="text-field text-field-list" placeholder="Задание" type="text" name="label" value="">
     <input class="button to-do-add-btn" type="submit" name="submit" value="Добавить">
   </form>
 </div>

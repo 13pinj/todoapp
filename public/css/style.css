@@ -52,12 +52,18 @@ body{
 		text-decoration: underline;
 	}
 
-	#user-name{
+	.user-name{
 		color: rgba(211, 212, 216, 0.5);
-		float: left;
 		margin: 0;
 	}
 
+	.user-name-index{
+		float: none;
+	}
+	
+	.user-name-show{
+		float: left;
+	}
 	#logout-form{
 		float: right;
 		margin-right: 35px;
@@ -162,12 +168,15 @@ body{
 .delete-list-item{
 	float: none;
 	visibility: hidden;
+
 }
 
-	.todo:hover .delete-list-item{
-		float: none;
-		visibility: visible;
-	}
+.to-do-checkbox-label
+
+label .to-do-checkbox:checked{
+	background: none;
+	visibility: hidden;
+}
 
 	.errors{
 		font-size: 12px;
@@ -271,9 +280,7 @@ a:hover{
 	text-decoration: underline;
 }
 
-
-.delete-list-btn{
-	float: right;
+.delete{
 	margin-right: 10px;
 	background: none;
 	border: none;
@@ -283,11 +290,20 @@ a:hover{
 	cursor: pointer;
 }
 
+
+.delete-list-btn{
+	float: right;
+}
+
 .delete-list-btn{
 	visibility: hidden;
 }
 
-.todolist:hover .delete-list-btn{
+.todolist:hover .delete{
+	visibility: visible;
+}
+
+.todo:hover .delete{
 	visibility: visible;
 }
 
