@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/gin-gonic/gin"
 	"github.com/13pinj/todoapp/controllers/page"
 	"github.com/13pinj/todoapp/controllers/todos"
@@ -30,5 +32,9 @@ func main() {
 	r.POST("/task/:id/update", todos.UpdateTask)
 	r.POST("/task/:id/destroy", todos.DestroyTask)
 
-	r.Run(":8080")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	r.Run(":" + port)
 }
