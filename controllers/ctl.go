@@ -3,8 +3,8 @@ package ctl
 import (
 	"net/http"
 
+	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/gin-gonic/gin"
 	"github.com/13pinj/todoapp/models/user"
-	"github.com/gin-gonic/gin"
 )
 
 // RenderHTML отвечает на запрос кодом 200 и выполненным шаблоном.

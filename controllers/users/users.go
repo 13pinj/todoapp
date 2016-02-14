@@ -1,9 +1,9 @@
 package users
 
 import (
+	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/gin-gonic/gin"
 	"github.com/13pinj/todoapp/controllers"
 	"github.com/13pinj/todoapp/models/user"
-	"github.com/gin-gonic/gin"
 )
 
 // RegistrationForm отсылает форму регистрации.

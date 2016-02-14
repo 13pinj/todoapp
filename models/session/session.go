@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/gin-gonic/gin"
 )
 
 // Session - интерфейс структуры сессии.

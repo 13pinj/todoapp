@@ -4,11 +4,11 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/gin-gonic/gin"
 	"github.com/13pinj/todoapp/controllers"
 	"github.com/13pinj/todoapp/models/todo"
 	"github.com/13pinj/todoapp/models/todolist"
 	"github.com/13pinj/todoapp/models/user"
-	"github.com/gin-gonic/gin"
 )
 
 // Index выводит страницу со всеми списками дел текущего пользователя.

@@ -3,8 +3,8 @@ package todo
 import (
 	"errors"
 
+	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/jinzhu/gorm"
 	"github.com/13pinj/todoapp/models"
-	"github.com/jinzhu/gorm"
 )
 
 // Todo - это cтруктура одного "дела".

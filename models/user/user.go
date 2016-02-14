@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/gin-gonic/gin"
+	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/jinzhu/gorm"
 	"github.com/13pinj/todoapp/models"
 	"github.com/13pinj/todoapp/models/session"
 	"github.com/13pinj/todoapp/models/todolist"
-	"github.com/gin-gonic/gin"
-	"github.com/jinzhu/gorm"
 )
 
 // User - структура модели пользователя

@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"runtime"
 
-	"github.com/gin-gonic/gin"
+	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/gin-gonic/gin"
 )
 
 // Server - структура тестового сервера.

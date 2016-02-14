@@ -4,9 +4,9 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/jinzhu/gorm"
 	"github.com/13pinj/todoapp/models"
 	"github.com/13pinj/todoapp/models/todo"
-	"github.com/jinzhu/gorm"
 )
 
 // TodoList - структура списка дел

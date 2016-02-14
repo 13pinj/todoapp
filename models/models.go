@@ -3,9 +3,9 @@ package models
 import (
 	"github.com/13pinj/todoapp/core/log"
 
-	"github.com/jinzhu/gorm"
+	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/jinzhu/gorm"
 	// SQLite driver for gorm
-	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/mattn/go-sqlite3"
 )
 
 // DB - переменная для доступа к БД

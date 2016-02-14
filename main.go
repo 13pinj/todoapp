@@ -1,11 +1,11 @@
 package main
 
 import (
+	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/gin-gonic/gin"
 	"github.com/13pinj/todoapp/controllers/page"
 	"github.com/13pinj/todoapp/controllers/todos"
 	"github.com/13pinj/todoapp/controllers/users"
 	"github.com/13pinj/todoapp/core/log"
-	"github.com/gin-gonic/gin"
 )
 
 func main() {
