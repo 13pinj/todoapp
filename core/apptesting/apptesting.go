@@ -1,11 +1,10 @@
 package apptesting
 
 import (
-	"fmt"
 	"net/http"
 	"net/http/cookiejar"
+	"net/http/httptest"
 	"net/url"
-	"runtime"
 
 	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/gin-gonic/gin"
 )
@@ -20,34 +19,20 @@ type Server struct {
 	URL *url.URL
 }
 
-var lastPort = 8080
+const testUrl = "/test/url"
 
 // NewServer запускает тестовый сервер на случайном порте, который направляет
 // входящие подключения на функцию fn.
 func NewServer(fn gin.HandlerFunc) *Server {
-	// Чтобы тестирования не началось случайно до того, как запустится сервер Gin.
-	runtime.GOMAXPROCS(1)
-
 	gin.SetMode(gin.TestMode)
+
 	r := gin.New()
 	r.LoadHTMLGlob("../../templates/*")
-	r.GET("/test/url", fn)
-	r.POST("/test/url", fn)
+	r.GET(testUrl, fn)
+	r.POST(testUrl, fn)
 
-	addr := fmt.Sprintf(":%v", lastPort)
-	urlString := fmt.Sprintf("http://localhost:%v/test/url", lastPort)
-	lastPort++
-
-	// Сервер запускается в отдельной горутине.
-	go r.Run(addr)
-	// Передаем очередь выполнения горутине сервера.
-	runtime.Gosched()
-	// Контроль текущей горутине вернется, как только сервер заблокируется
-	// в ожидании подключений - то есть когда он будет полностью инициализирован.
-	// Довольно костыльное решение, но gin не предоставляет
-	// нормального функционала для тестирования.
-
-	serverURL, err := url.Parse(urlString)
+	htserver := httptest.NewServer(r)
+	serverURL, err := url.Parse(htserver.URL + testUrl)
 	if err != nil {
 		panic(err)
 	}
