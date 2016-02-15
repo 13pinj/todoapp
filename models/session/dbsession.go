@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/gin-gonic/gin"
 	"github.com/13pinj/todoapp/models"
-	"github.com/gin-gonic/gin"
 )
 
 type dbSession struct {
