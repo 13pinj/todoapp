@@ -33,7 +33,9 @@
       <button type="button" name="button" class="delete delete-list-item">Удалить</button>
     </li>
     {{else}}
-    <li><i>Дел нет</i></li>
+    <li id="none-items">
+      Дел нет!
+    </li>
     {{end}}
   </ul>
   <form class="to-do-add-form" action="{{.List.Path}}/add" method="post">

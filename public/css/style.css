@@ -135,8 +135,7 @@ body{
 		width: 400px;
 		border: none;
 		padding: 0;
-		margin: 20px 0 0 10px;
-		margin-top: 20px;
+		margin: 0px 0 20px 10px;
 		margin-left: 10px;
 		color: rgba(0, 0, 0, 0.75);
 		font-size: 22px;
@@ -197,7 +196,8 @@ label .to-do-checkbox:checked{
 	}
 
 	.errors-list-show{
-		margin-left: 10px;
+		margin-left: 64px;
+		margin-bottom: 10px;
 	}
 
 	input[type=checkbox]:checked{
@@ -246,8 +246,16 @@ label .to-do-checkbox:checked{
 }
 
 #none-lists{
+	margin-bottom: 10px;
 	padding-left: 0;
 	text-align: center;
+	color: rgba(0, 0, 0, 0.31);
+}
+
+#none-items{
+	color: rgba(0, 0, 0, 0.62);
+	margin-left: 250px;
+	margin-bottom: 10px;
 }
 
 .todolist, .title-list-item{
@@ -258,6 +266,8 @@ label .to-do-checkbox:checked{
 }
 
 .todo{
+	margin: 0;
+	padding: 0;
 	margin-left: 64px;
 }
 
@@ -265,7 +275,7 @@ label .to-do-checkbox:checked{
 }
 
 .to-do-add-form{
-	margin: 30px 0 0 64px;
+	margin: 0 0 0 64px;
 }
 
 a{
