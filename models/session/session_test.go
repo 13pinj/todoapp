@@ -6,6 +6,7 @@ import (
 
 	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/gin-gonic/gin"
 	"github.com/13pinj/todoapp/core/apptesting"
+	"github.com/13pinj/todoapp/models"
 )
 
 var (
@@ -26,7 +27,7 @@ func TestMain(m *testing.M) {
 		session2 = FromContext(c)
 	}
 	dsServer = apptesting.NewServer(hf)
-
+	models.DB.LogMode(false)
 	os.Exit(m.Run())
 }
 

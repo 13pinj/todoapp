@@ -28,5 +28,5 @@ func FromContext(c *gin.Context) Session {
 	if c == nil {
 		return nil
 	}
-	return imFromContext(c)
+	return dbFromContext(c)
 }
