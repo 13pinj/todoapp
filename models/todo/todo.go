@@ -43,7 +43,7 @@ func Find(id uint) (*Todo, bool) {
 // имеющим заданный ID.
 func FindByList(listid uint) []*Todo {
 	slice := []*Todo{}
-	models.DB.Where("todo_list_id = ?", listid).Find(&slice)
+	models.DB.Where("todo_list_id = ?", listid).Order("created_at ASC").Find(&slice)
 	return slice
 }
 

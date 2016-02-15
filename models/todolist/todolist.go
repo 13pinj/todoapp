@@ -40,7 +40,7 @@ func New(t string) *TodoList {
 // с заданным ID.
 func FindByUser(userID uint) []*TodoList {
 	slice := []*TodoList{}
-	models.DB.Where("user_id = ?", userID).Find(&slice)
+	models.DB.Where("user_id = ?", userID).Order("created_at ASC").Find(&slice)
 	return slice
 }
 
