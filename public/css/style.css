@@ -17,13 +17,17 @@ body{
 
 /*#wrapper {
 	width: 1200px;
-	margin: 0 auto;	
+	margin: 0 auto;
 	}*/
 
 	#l-collumn{
 		padding: 45px 0 0 35px;
 		float: left;
 		width: 410px;
+	}
+
+	#l-collumn .user-name {
+		margin-top: 2px;
 	}
 
 	#r-collumn{
@@ -33,7 +37,7 @@ body{
 		left: 445px;
 		right: 0;
 		height: 100%;
-	}	
+	}
 
 	#logout-button{
 		cursor: pointer;
@@ -42,7 +46,15 @@ body{
 		border: none;
 		color: rgb(211, 212, 216);
 		padding: 0;
-		padding-left: 10px;
+		margin-left: 10px;
+	}
+
+	#logout-button:hover {
+		text-decoration: underline;
+	}
+
+	#index-header-right #logout-button {
+		font-size: 12pt;
 	}
 
 	#back-to-index{
@@ -58,15 +70,15 @@ body{
 	}
 
 	.user-name-index{
-		float: none;
+		font-size: 12pt;
 	}
-	
+
 	.user-name-show{
 		float: left;
 	}
 	#logout-form{
 		float: right;
-		margin-right: 35px;
+		margin-right: 40px;
 	}
 
 	#login, #register, #index{
@@ -82,21 +94,24 @@ body{
 		top: 0;
 	}
 
-	#login-header, #register-header, #index-header{
-		height: 64px;
+	#login-header, #register-header, #index-header {
+		margin: 20px 0px;
+	}
+
+	#login-header::after, #register-header::after, #index-header::after{
+		content: '';
+		display: block;
+		clear: both;
 	}
 
 	#logo{
-		width: 127px;
 		float: left;
 		color: rgb(211, 212, 216);
 	}
 
 	#index-header-right{
-		margin-left: 127px;
-		text-align: right;
-		width: 483px;
-		padding-top: 18px;
+		float: right;
+		margin-top: 14px;
 	}
 
 	#login h2, #register h2, #index h2{
@@ -116,6 +131,7 @@ body{
 	}
 
 	#title-list-form{
+		overflow: hidden;
 		width: 370px;
 		margin-top: 40px;
 		padding-top: 0;
@@ -123,9 +139,8 @@ body{
 
 	.title-editable{
 		border: none;
-		margin: 0;
 		padding: 0;
-		margin: 20px 0 15px 64px;
+		margin: 40px 0 15px 64px;
 		color: rgba(0, 0, 0, 0.31);
 		font-size: 26px;
 
@@ -138,10 +153,11 @@ body{
 		margin: 0px 0 20px 10px;
 		margin-left: 10px;
 		color: rgba(0, 0, 0, 0.75);
-		font-size: 22px;
+		font-size: 12pt;
 	}
 
 	.text-field{
+		font-size: 12pt;
 		width: 280px;
 		border-style: none;
 		height: 50px;
@@ -167,10 +183,9 @@ body{
 .delete-list-item{
 	float: none;
 	visibility: hidden;
-
+	position: relative;
+	bottom: 6px;
 }
-
-.to-do-checkbox-label
 
 label .to-do-checkbox:checked{
 	background: none;
@@ -179,7 +194,7 @@ label .to-do-checkbox:checked{
 
 	.errors{
 		font-size: 12px;
-		color: rgb(236, 24, 93); 
+		color: rgb(236, 24, 93);
 		width: 100%;
 		padding-left: 0px;
 		margin: 0px 0px 0px 15px;
@@ -191,7 +206,6 @@ label .to-do-checkbox:checked{
 	}
 
 	.errors-home{
-		width: 450px;
 		margin: 0 0 10px 12px;
 	}
 
@@ -207,6 +221,7 @@ label .to-do-checkbox:checked{
 	}
 
 	.button{
+		font-size: 12pt;
 		font-weight: 600;
 		cursor: pointer;
 		margin: 0 0 0 10px;
@@ -217,6 +232,7 @@ label .to-do-checkbox:checked{
 		border: none;
 		background-color: rgb(63, 186, 194);
 		color: #fff;
+		margin-right: 5px;
 	}
 
 	.button:hover{
@@ -229,7 +245,6 @@ label .to-do-checkbox:checked{
 	}
 
 	.login-btn{
-		margin-top: 10px;
 		margin-bottom: 10px;
 	}
 
@@ -241,10 +256,6 @@ label .to-do-checkbox:checked{
 		width: 120px;
 	}
 
-{
-	width: 20px;
-}
-
 #none-lists{
 	margin-bottom: 10px;
 	padding-left: 0;
@@ -254,15 +265,21 @@ label .to-do-checkbox:checked{
 
 #none-items{
 	color: rgba(0, 0, 0, 0.62);
-	margin-left: 250px;
-	margin-bottom: 10px;
+	margin-left: 64px;
+	margin-bottom: 32px;
 }
 
 .todolist, .title-list-item{
-	padding-left: 25px;
-	padding-bottom: 20px;
-	border-bottom: 1px solid rgb(223, 223, 223);
-	padding-top: 20px;
+	padding: 20px 25px;
+	border-top: 1px solid rgb(223, 223, 223);
+}
+
+.todolist a {
+	font-size: 14pt;
+}
+
+.todolist {
+	font-size: 10pt;
 }
 
 .todo{
@@ -291,22 +308,20 @@ a:hover{
 }
 
 .delete{
-	margin-right: 10px;
+	font-size: 10pt;
 	background: none;
 	border: none;
 	color: rgb(236, 24, 93);
 	padding: 0;
-	border-bottom: 2px dotted rgb(236, 24, 93);
+	border-bottom: 1px dotted rgb(236, 24, 93);
 	cursor: pointer;
 }
 
 
 .delete-list-btn{
 	float: right;
-}
-
-.delete-list-btn{
 	visibility: hidden;
+	margin-top: 2px;
 }
 
 .todolist:hover .delete{
@@ -327,8 +342,4 @@ a:hover{
 
 #l-collumn-header a, #l-collumn-header p, #l-collumn-header input{
 	font-size: 14px;
-}
-
-span{
-	padding-left: 5px;
 }
