@@ -80,9 +80,10 @@ func dbSessionInit(c *gin.Context) *dbSession {
 	models.DB.Create(&session)
 
 	http.SetCookie(c.Writer, &http.Cookie{
-		Name:  "SessID",
-		Value: session.SID,
-		Path:  "/",
+		Name:    "SessID",
+		Value:   session.SID,
+		Path:    "/",
+		Expires: time.Now().AddDate(10, 0, 0),
 	})
 	return &session
 }
