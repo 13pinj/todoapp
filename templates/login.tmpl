@@ -1,21 +1,15 @@
 {{template "header" .}}
-<div id="login">
-  <div id="login-header">
-    <h1 id="logo">TodoApp</h1>
-    <h2>Списки дел</h2>
-  </div>
-  <div id="login-form">
-  <form id="" action="/login" method="post">
-      <input class="text-field" type="text" name="name" value="" placeholder="Логин"><br>
-      <input class="text-field" type="password" name="password" value="" placeholder="Пароль"><br>
-      <ul class="errors">
-        {{range .Errors}}
-        <li>{{.}}</li>
-        {{end}}
-      </ul>
-      <input class="button login-btn" type="submit" name="submit" value="Войти">
-      <span>или</span> <a href="/register">Зарегистрироваться</a>
-    </form>
-  </div>
-</div>
+<h1>TodoApp</h1>
+<h2>Списки дел</h2>
+<form action="/login" method="post">
+  <input type="text" name="name" placeholder="Логин"><br>
+  <input type="password" name="password" placeholder="Пароль"><br>
+  <ul>
+    {{range .Errors}}
+    <li>{{.}}</li>
+    {{end}}
+  </ul>
+  <input type="submit" name="submit" value="Войти">
+  или <a href="/register">Зарегистрироваться</a>
+</form>
 {{template "footer" .}}

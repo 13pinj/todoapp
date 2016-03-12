@@ -1,21 +1,15 @@
 {{template "header" .}}
-<div id="register">
-	<div id="register-header">
-		<h1 id="logo">TodoApp</h1>
-		<h2>Списки дел</h2>
-	</div>
-	<div id="register-form">
-		<form action="/register" method="post">
-		<input class="text-field" type="text" name="name" value="" placeholder="Имя"><br>
-			<input class="text-field" type="password" name="password" value="" placeholder="Пароль"><br>
-			<ul class="errors">
-				{{range .Errors}}
-				<li>{{.}}</li>
-				{{end}}
-			</ul>
-			<input class="button register-button" type="submit" name="submit" value="Зарегистрироваться">
-			или <a href="/">Войти</a>
-		</form>
-	</div>
-</div>
+<h1>TodoApp</h1>
+<h2>Списки дел</h2>
+<form action="/register" method="post">
+	<input type="text" name="name" placeholder="Имя"><br>
+	<input type="password" name="password" placeholder="Пароль"><br>
+	<ul>
+		{{range .Errors}}
+		<li>{{.}}</li>
+		{{end}}
+	</ul>
+	<input type="submit" name="submit" value="Зарегистрироваться">
+	или <a href="/">Войти</a>
+</form>
 {{template "footer" .}}
