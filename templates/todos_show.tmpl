@@ -1,38 +1,51 @@
 {{template "header" .}}
-<a href="/">Назад на главную</a>
-<form action="/logout" method="post">
-  {{.CurrentUser.Name}}
-  <input type="submit" name="submit" value="Выход">
-</form>
-
-<ul>
-  {{range .Lists}}
-  <li>
-    <a href="{{.Path}}">{{.Title}}</a>
-  </li>
-  {{end}}
-</ul>
-
-<input type="text" name="title" value="{{.List.Title}}" data-id="{{.List.ID}}">
-<p id="error-alert" >
-  {{if .AlertError}}{{.AlertError}}{{end}}
-</p>
-<ul>
-  {{range .List.Todos}}
-  <li class="todo" data-id="{{.ID}}">
-
-    <input type="checkbox" name="done" {{if .Done}}checked{{end}}>
-    <input type="text" placeholder="Задание" name="label" value="{{.Label}}" >
-    <button type="button" name="button" class="delete">Удалить</button>
-  </li>
-  {{else}}
-  <li>
-    Дел нет!
-  </li>
-  {{end}}
-</ul>
-<form action="{{.List.Path}}/add" method="post">
-  <input type="text" name="label" value="">
-  <input type="submit" name="submit" value="Добавить">
-</form>
+<div class="center-col large">
+  <div class="panel clearfix">
+    <div class="list-topbar clearfix">
+      <form action="/logout" method="post">
+        <h1 class="float-left">TodoApp</h1>
+        <a class="float-left vcenter back" href="/">Назад на главную</a>
+        <div class="float-right vcenter">
+          {{.CurrentUser.Name}}
+          <input class="link" type="submit" name="submit" value="Выход">
+        </div>
+      </form>
+    </div>
+    <div class="list-sidebar">
+      <ul>
+        {{range .Lists}}
+        <li class="todolist-item">
+          <a href="{{.Path}}">{{.Title}}</a>
+          <span class="list-stat">{{.LenDone}}/{{.Len}}</span>
+        </li>
+        {{end}}
+      </ul>
+    </div>
+    <div class="list-mainbar">
+      <input class="transparent list-header todolist-title" type="text" name="title" value="{{.List.Title}}" data-id="{{.List.ID}}">
+      <p class="error" id="error-alert" >
+        {{if .AlertError}}{{.AlertError}}{{end}}
+      </p>
+      <ul>
+        {{range .List.Todos}}
+        <li class="todo todo-item" data-id="{{.ID}}">
+          <input type="checkbox" name="done" {{if .Done}}checked{{end}}>
+          <input class="transparent" type="text" placeholder="Задание" name="label" value="{{.Label}}" >
+          <button type="button" name="button" class="delete">Удалить</button>
+        </li>
+        {{else}}
+        <li class="no-todo">
+          Дел пока нет :(
+        </li>
+        {{end}}
+      </ul>
+      <form action="{{.List.Path}}/add" method="post">
+        <div class="inp-btn-group">
+          <input type="text" name="label" placeholder="Новое задание">
+          <input type="submit" name="submit" value="Добавить">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 {{template "footer" .}}

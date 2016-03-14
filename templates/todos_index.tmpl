@@ -1,27 +1,35 @@
 {{template "header" .}}
-<h1>TodoApp</h1>
-<form action="/logout" method="post">
-  {{.CurrentUser.Name}}
-  <input type="submit" name="submit" value="Выход">
-</form>
-<form action="/list-create" method="post">
-  <input type="text" name="title" value="" placeholder="Заголовок">
-  <input type="submit" name="submit" value="Добавить">
-</form>
-<p id="error-alert">
-  {{if .AlertError}}{{.AlertError}}{{end}}
-</p>
-<ul>
-  {{range .Lists}}
-  <li class="todolist" data-id="{{.ID}}">
-   <a href="{{.Path}}">{{.Title}}</a>
-    ({{.LenDone}}/{{.Len}})
-    <button type="button" name="button" class="delete">Удалить</button>
-  </li>
-  {{else}}
-  <li>
-    Списков дел нет :(
-  </li>
-  {{end}}
-</ul>
+<div class="center-col">
+  <div class="panel">
+    <div class="clearfix">
+      <h1 class="float-left">TodoApp</h1>
+      <form class="float-right" style="margin-top:5px;" action="/logout" method="post">
+        {{.CurrentUser.Name}}
+        <input class="link" type="submit" name="submit" value="Выход">
+      </form>
+    </div>
+    <form action="/list-create" method="post">
+      <div class="inp-btn-group">
+        <input type="text" name="title" value="" placeholder="Заголовок">
+        <input type="submit" name="submit" value="Добавить">
+      </div>
+    </form>
+    <p class="error list-create-error" id="error-alert">
+      {{if .AlertError}}{{.AlertError}}{{end}}
+    </p>
+    <ul>
+      {{range .Lists}}
+      <li class="todolist todolist-item" data-id="{{.ID}}">
+        <a href="{{.Path}}">{{.Title}}</a>
+        <span class="list-stat">{{.LenDone}}/{{.Len}}</span>
+        <button type="button" name="button" class="delete">Удалить</button>
+      </li>
+      {{else}}
+      <li class="no-todolist">
+        Списков дел нет :(
+      </li>
+      {{end}}
+    </ul>
+  </div>
+</div>
 {{template "footer" .}}
