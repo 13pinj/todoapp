@@ -149,6 +149,37 @@ func (u *User) Destroy() {
 	models.DB.Delete(u)
 }
 
+// Count возвращает общее количество всех существующих пользователей.
+func Count() int {
+	return 0
+}
+
+// Pages возвращает количество страниц, на которые мог бы поместиться
+// список всех существующих пользователей по n элементов на страницу.
+func Pages(n int) int {
+	return 0
+}
+
+// SortMode определяет режим сортировки выборки пользователей.
+type SortMode string
+
+// Возможные варианты сортировки выборок пользователей.
+const (
+	ByID            SortMode = "id"
+	ByName          SortMode = "name"
+	ByCreatedAt     SortMode = "created_at"
+	ByIDDesc        SortMode = "id desc"
+	ByNameDesc      SortMode = "name desc"
+	ByCreatedAtDesc SortMode = "created_at desc"
+)
+
+// FindPage возвращает список пользователей на i-й странице, если бы они
+// размещались по n штук на страницу, отсортированные по sortBy.
+// Отсчет страниц ведется с единицы.
+func FindPage(i, n int, sortBy SortMode) []*User {
+	return nil
+}
+
 var initUser = &User{
 	Name:    "root",
 	PwdHash: hashPwd("12345678"),

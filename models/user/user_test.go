@@ -1,6 +1,8 @@
 package user
 
 import (
+	"fmt"
+	"math/rand"
 	"os"
 	"testing"
 
@@ -437,4 +439,52 @@ func TestInit(t *testing.T) {
 	if !ok || u == nil {
 		t.Error("Find не нашел пользователя initUser")
 	}
+}
+
+func TestCountNPages(t *testing.T) {
+	client := apptesting.NewClient()
+	for i := 0; i < 20; i++ {
+		cr := cred{fmt.Sprintf("pages_tester_%v", i), "qwerty12121212"}
+		prepareTest(t, client, &cr)
+	}
+
+	n := Count()
+	if n < 20 {
+		t.Errorf("Count вернуло %v, хотя было создано не менее 20 пользователей", n)
+	}
+
+	p5n := Pages(5)
+	if p5n*5 < n {
+		t.Errorf("Pages(5) вернуло %v при %v пользователях", p5n, n)
+	}
+
+	arr := FindPage(p5n+1, 5, ByID)
+	if len(arr) > 0 {
+		t.Errorf("FindPage вернуло непустой слайс для несущ. страницы: %v", arr)
+	}
+
+	checkSort := func(sm SortMode, wrongOrd func(a, b *User) bool) {
+		p := 1
+		if p5n > 1 {
+			p = rand.Intn(p5n-1)
+		}
+		arr = FindPage(p, 5, sm)
+		if len(arr) < 5 {
+			t.Errorf("FindPage(%v, 5, %q) вернуло слайс короче 5 (%v), хотя страница гарантировано заполнена", p, sm, len(arr))
+		}
+		for i := 0; i < len(arr)-1; i++ {
+			if wrongOrd(arr[i], arr[i+1]) {
+				t.Errorf("FindPage(%v, 5, %q) вернуло неверно отсортированную страницу: %v", p, sm, arr)
+				break
+			}
+		}
+	}
+
+	checkSort(ByID, func(a, b *User) bool { return a.ID > b.ID })
+	checkSort(ByName, func(a, b *User) bool { return a.Name > b.Name })
+	checkSort(ByCreatedAt, func(a, b *User) bool { return a.CreatedAt.Unix() > b.CreatedAt.Unix() })
+
+	checkSort(ByIDDesc, func(a, b *User) bool { return b.ID > a.ID })
+	checkSort(ByNameDesc, func(a, b *User) bool { return b.Name > a.Name })
+	checkSort(ByCreatedAtDesc, func(a, b *User) bool { return b.CreatedAt.Unix() > a.CreatedAt.Unix() })
 }
