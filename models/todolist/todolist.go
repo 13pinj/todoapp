@@ -15,7 +15,7 @@ type TodoList struct {
 	// Заголовок списка
 	Title string
 	// Список todo
-	Todos []*todo.Todo
+	Todos []*todo.Todo `gorm:"-"`
 	// ID пользователя, которому принадлежит список
 	UserID uint
 }

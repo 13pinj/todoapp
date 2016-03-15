@@ -26,7 +26,7 @@ type User struct {
 	Name    string
 	PwdHash string
 	Role    string
-	Lists   []*todolist.TodoList
+	Lists   []*todolist.TodoList `gorm:"-"`
 }
 
 func validateName(name string) bool {
