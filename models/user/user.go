@@ -27,14 +27,6 @@ type User struct {
 	Lists   []*todolist.TodoList
 }
 
-// LoadLists загружает из базы списки дел пользователя в поле Lists
-func (u *User) LoadLists() {
-	if u.Lists != nil {
-		return
-	}
-	u.Lists = todolist.FindByUser(u.ID)
-}
-
 func validateName(name string) bool {
 	err := models.DB.Where("name = ?", name).First(&User{}).Error
 	return err != nil
@@ -128,6 +120,14 @@ func Find(name string) (*User, bool) {
 func (u *User) AutoLogin(c *gin.Context) {
 	st := session.FromContext(c)
 	st.SetInt("user_id", int(u.ID))
+}
+
+// LoadLists загружает из базы списки дел пользователя в поле Lists
+func (u *User) LoadLists() {
+	if u.Lists != nil {
+		return
+	}
+	u.Lists = todolist.FindByUser(u.ID)
 }
 
 func (u *User) SetRole(r string) {
