@@ -13,11 +13,17 @@ import (
 	"github.com/13pinj/todoapp/models/todolist"
 )
 
+const (
+	DefaultRole = ""
+	AdminRole   = "admin"
+)
+
 // User - структура модели пользователя
 type User struct {
 	gorm.Model
 	Name    string
 	PwdHash string
+	Role    string
 	Lists   []*todolist.TodoList
 }
 
@@ -34,6 +40,10 @@ func validateName(name string) bool {
 	return err != nil
 }
 
+func hashPwd(pwd string) string {
+	return fmt.Sprintf("%x", sha1.Sum([]byte(pwd)))
+}
+
 // Register добавляет нового пользователя в базу, и возвращает его структуру,
 // если введенные поля корректны. В противном случае Register возвращает ошибку.
 func Register(name string, password string) (u *User, errs []error) {
@@ -47,16 +57,16 @@ func Register(name string, password string) (u *User, errs []error) {
 	if len([]rune(password)) < 6 {
 		errs = append(errs, errors.New("Пароль слишком короткий (минимум 6 символов)"))
 	}
+	// TODO: Заменить вызов validateName на Find
 	if !validateName(name) {
 		errs = append(errs, errors.New("Имя кем-то занято"))
 	}
 	if errs != nil {
 		return
 	}
-	hash := sha1.Sum([]byte(password))
 	u = &User{
 		Name:    name,
-		PwdHash: fmt.Sprintf("%x", hash),
+		PwdHash: hashPwd(password),
 	}
 	err := models.DB.Save(u).Error
 	if err != nil {
@@ -109,6 +119,10 @@ func FromContext(c *gin.Context) (*User, bool) {
 	return user, true
 }
 
+func Find(name string) (*User, bool) {
+	return nil, false
+}
+
 // AutoLogin запишет факт авторизации в сессию пользователя.
 // Он перезапишет старые данные об авторизации, если таковые имеются.
 func (u *User) AutoLogin(c *gin.Context) {
@@ -116,11 +130,32 @@ func (u *User) AutoLogin(c *gin.Context) {
 	st.SetInt("user_id", int(u.ID))
 }
 
+func (u *User) SetRole(r string) {
+
+}
+
+func (u *User) Admin() bool {
+	return false
+}
+
 // Destroy стирает данные о пользователе из базы данных.
 func (u *User) Destroy() {
 	models.DB.Delete(u)
 }
 
+var initUser = &User{
+	Name:    "root",
+	PwdHash: hashPwd("12345678"),
+	Role:    AdminRole,
+}
+
 func init() {
-	models.DB.AutoMigrate(&User{})
+	initializeUsers()
+}
+
+func initializeUsers() {
+	if !models.DB.HasTable(initUser) {
+		models.DB.CreateTable(initUser).Create(initUser)
+	}
+	models.DB.AutoMigrate(initUser)
 }

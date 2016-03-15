@@ -377,3 +377,64 @@ func TestUser_Destroy(t *testing.T) {
 		t.Error("Destroy() должно делать AutoLogin невозможным")
 	}
 }
+
+func TestFind(t *testing.T) {
+	cr := cred{"find_tester", "qwerty1234567"}
+	client := apptesting.NewClient()
+	u := prepareTest(t, client, &cr)
+
+	fu, ok := Find(cr.name)
+	if !ok {
+		t.Fatalf("Find не нашел существующего пользователя: %q", cr.name)
+	}
+	if fu == nil {
+		t.Fatal("Find вернул nil, true")
+	}
+	if fu.ID != u.ID {
+		t.Fatalf("Find нашел не того пользователя. Найден %v, ожидался %v.", fu.ID, u.ID)
+	}
+
+	cr2 := cred{"find_inexisting_tester", "qwerty1234567"}
+	fu, ok = Find(cr2.name)
+	if ok {
+		t.Fatalf("Find вернул true при поиске несуществующегося пользователя: %q", cr2.name)
+	}
+	if fu != nil {
+		t.Fatalf("Find вернул %#v, false", fu)
+	}
+}
+
+func TestRoles(t *testing.T) {
+	defCr := cred{"default_role_user", "qwerty1234567"}
+	admCr := cred{"admin_user", "qwerty1234567"}
+	client := apptesting.NewClient()
+
+	defu := prepareTest(t, client, &defCr)
+	if defu.Admin() {
+		t.Error("Пользователь с незаданной ролью оказался админом.")
+	}
+
+	adm := prepareTest(t, client, &admCr)
+	adm.SetRole(AdminRole)
+	if !adm.Admin() {
+		t.Errorf("Admin вернуло false при вызове на админе: %#v", adm)
+	}
+
+	adm1, _ := Find(adm.Name)
+	if adm1 == nil {
+		t.Fatalf("Find работает некорректно")
+	}
+	if !adm1.Admin() {
+		t.Error("SetRole не сохранил роль в базу")
+	}
+}
+
+func TestInit(t *testing.T) {
+	models.DB.DropTable(User{})
+	initializeUsers()
+
+	u, ok := Find(initUser.Name)
+	if !ok || u == nil {
+		t.Error("Find не нашел пользователя initUser")
+	}
+}
