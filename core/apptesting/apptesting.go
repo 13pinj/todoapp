@@ -19,7 +19,7 @@ type Server struct {
 	URL *url.URL
 }
 
-const testUrl = "/test/url"
+const testURL = "/test/url"
 
 // NewServer запускает тестовый сервер на случайном порте, который направляет
 // входящие подключения на функцию fn.
@@ -28,11 +28,11 @@ func NewServer(fn gin.HandlerFunc) *Server {
 
 	r := gin.New()
 	r.LoadHTMLGlob("../../templates/*")
-	r.GET(testUrl, fn)
-	r.POST(testUrl, fn)
+	r.GET(testURL, fn)
+	r.POST(testURL, fn)
 
 	htserver := httptest.NewServer(r)
-	serverURL, err := url.Parse(htserver.URL + testUrl)
+	serverURL, err := url.Parse(htserver.URL + testURL)
 	if err != nil {
 		panic(err)
 	}

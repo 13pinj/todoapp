@@ -13,6 +13,8 @@ import (
 	"github.com/13pinj/todoapp/models/todolist"
 )
 
+// Роли пользователя.
+// Возможные значения User.Role.
 const (
 	DefaultRole = ""
 	AdminRole   = "admin"
@@ -111,6 +113,8 @@ func FromContext(c *gin.Context) (*User, bool) {
 	return user, true
 }
 
+// Find находит пользователя в базе по указанному имени.
+// Второе возвращаемое значение будет равно false в случае безуспешного поиска.
 func Find(name string) (*User, bool) {
 	return nil, false
 }
@@ -130,10 +134,12 @@ func (u *User) LoadLists() {
 	u.Lists = todolist.FindByUser(u.ID)
 }
 
+// SetRole задает пользователю новую роль и сохраняют в базу.
 func (u *User) SetRole(r string) {
 
 }
 
+// Admin возвращает true, если пользователь относится к администрации.
 func (u *User) Admin() bool {
 	return false
 }
