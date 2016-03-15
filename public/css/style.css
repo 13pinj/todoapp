@@ -490,3 +490,72 @@ input.transparent
 {
 	visibility: visible;
 }
+
+/*
+* FIRST VIEW BREAKPOINT: 840 + 24*2 = 888px
+*/
+@media screen and (max-width: 888px)
+{
+	.center-col.large
+	{
+		width: 480px;
+		margin-left: -240px;
+	}
+	.list-sidebar
+	{
+		width: 100%;
+		padding-right: 0;
+		padding-bottom: 12px;
+
+		border-right: none;
+		/*border-bottom: 1px solid rgb(230, 230, 230);*/
+	}
+	.list-mainbar
+	{
+		width: 100%;
+		padding-top: 12px;
+		padding-left: 0;
+
+		border-left: none;
+	}
+}
+
+/*
+* SECOND VIEW BREAKPOINT: 480 + 24*2 = 528px
+*/
+@media screen and (max-width: 528px) {
+	body {
+		background-color: white;
+	}
+	.center-col, .center-col.large {
+		width: 100%;
+		margin: 0;
+		left: 0;
+	}
+	.center-col .auth-form {
+		top: 0;
+	}
+	.panel, .center-col .panel {
+		border-radius: 0;
+		margin: 0;
+		box-shadow: none;
+	}
+	.delete {
+		font-size: 1rem;
+		margin-top: 0;
+	}
+	.todolist-item .delete,
+	.todo-item .delete {
+		visibility: visible;
+	}
+	.todo-item input[type='text'] {
+		width: 60%;
+	}
+	.inp-btn-group input[type='text'] {
+		width: 65%;
+	}
+	.inp-btn-group input[type='submit'],
+	.inp-btn-group button {
+		width: 35%;
+	}
+}
