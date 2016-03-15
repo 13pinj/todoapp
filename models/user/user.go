@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/gin-gonic/gin"
 	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/jinzhu/gorm"
@@ -23,10 +24,11 @@ const (
 // User - структура модели пользователя
 type User struct {
 	gorm.Model
-	Name    string
-	PwdHash string
-	Role    string
-	Lists   []*todolist.TodoList `gorm:"-"`
+	Name      string
+	PwdHash   string
+	Role      string
+	Lists     []*todolist.TodoList `gorm:"-"`
+	VisitedAt time.Time
 }
 
 func validateName(name string) bool {
@@ -110,6 +112,7 @@ func FromContext(c *gin.Context) (*User, bool) {
 	if err != nil {
 		return nil, false
 	}
+	user.MarkVisit()
 	return user, true
 }
 
@@ -124,6 +127,11 @@ func Find(name string) (*User, bool) {
 func (u *User) AutoLogin(c *gin.Context) {
 	st := session.FromContext(c)
 	st.SetInt("user_id", int(u.ID))
+}
+
+// MarkVisit обновляет поле VisitedAt и сохраняет в базу.
+func (u *User) MarkVisit() {
+
 }
 
 // LoadLists загружает из базы списки дел пользователя в поле Lists
