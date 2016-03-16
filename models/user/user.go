@@ -53,8 +53,8 @@ func Register(name string, password string) (u *User, errs []error) {
 	if len([]rune(password)) < 6 {
 		errs = append(errs, errors.New("Пароль слишком короткий (минимум 6 символов)"))
 	}
-	// TODO: Заменить вызов validateName на Find
-	if !validateName(name) {
+	_, ok = Find(name)
+	if ok {
 		errs = append(errs, errors.New("Имя кем-то занято"))
 	}
 	if errs != nil {
@@ -119,7 +119,12 @@ func FromContext(c *gin.Context) (*User, bool) {
 // Find находит пользователя в базе по указанному имени.
 // Второе возвращаемое значение будет равно false в случае безуспешного поиска.
 func Find(name string) (*User, bool) {
-	return nil, false
+	user := &User{}
+	err := models.DB.Where("name = ?", name).First(user).Error
+	if err != nil {
+		return nil, false
+	}
+	return user, true
 }
 
 // AutoLogin запишет факт авторизации в сессию пользователя.
@@ -131,7 +136,8 @@ func (u *User) AutoLogin(c *gin.Context) {
 
 // MarkVisit обновляет поле VisitedAt и сохраняет в базу.
 func (u *User) MarkVisit() {
-
+	u.UpdatedAt = time.Now()
+	models.DB.Save(u)
 }
 
 // LoadLists загружает из базы списки дел пользователя в поле Lists
@@ -144,11 +150,15 @@ func (u *User) LoadLists() {
 
 // SetRole задает пользователю новую роль и сохраняют в базу.
 func (u *User) SetRole(r string) {
-
+	u.Role = r
+	models.DB.Save(u)
 }
 
 // Admin возвращает true, если пользователь относится к администрации.
 func (u *User) Admin() bool {
+	if u.Role == AdminRole {
+		return true
+	}
 	return false
 }
 
@@ -159,13 +169,16 @@ func (u *User) Destroy() {
 
 // Count возвращает общее количество всех существующих пользователей.
 func Count() int {
-	return 0
+	var count int
+	models.DB.Model(&User{}).Count(&count)
+	return count
 }
 
 // Pages возвращает количество страниц, на которые мог бы поместиться
 // список всех существующих пользователей по n элементов на страницу.
 func Pages(n int) int {
-	return 0
+	c := Count()
+	return (c-1)/n + 1
 }
 
 // SortMode определяет режим сортировки выборки пользователей.
@@ -185,7 +198,9 @@ const (
 // размещались по n штук на страницу, отсортированные по sortBy.
 // Отсчет страниц ведется с единицы.
 func FindPage(i, n int, sortBy SortMode) []*User {
-	return nil
+	slice := []*User{}
+	models.DB.Limit(n).Model(&User{}).Offset(n * (i - 1)).Order(string(sortBy)).Find(&slice)
+	return slice
 }
 
 var initUser = &User{
