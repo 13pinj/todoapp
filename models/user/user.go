@@ -31,11 +31,6 @@ type User struct {
 	VisitedAt time.Time
 }
 
-func validateName(name string) bool {
-	err := models.DB.Where("name = ?", name).First(&User{}).Error
-	return err != nil
-}
-
 func hashPwd(pwd string) string {
 	return fmt.Sprintf("%x", sha1.Sum([]byte(pwd)))
 }
@@ -43,8 +38,7 @@ func hashPwd(pwd string) string {
 // Register добавляет нового пользователя в базу, и возвращает его структуру,
 // если введенные поля корректны. В противном случае Register возвращает ошибку.
 func Register(name string, password string) (u *User, errs []error) {
-	ok := strings.Contains(name, " ")
-	if ok {
+	if strings.Contains(name, " ") {
 		errs = append(errs, errors.New("Пробел в имени запрещен"))
 	}
 	if len([]rune(name)) < 4 {
@@ -53,8 +47,7 @@ func Register(name string, password string) (u *User, errs []error) {
 	if len([]rune(password)) < 6 {
 		errs = append(errs, errors.New("Пароль слишком короткий (минимум 6 символов)"))
 	}
-	_, ok = Find(name)
-	if ok {
+	if _, ok := Find(name); ok {
 		errs = append(errs, errors.New("Имя кем-то занято"))
 	}
 	if errs != nil {
@@ -82,9 +75,7 @@ func Login(c *gin.Context, name string, password string) (*User, bool) {
 	if err != nil {
 		return nil, false
 	}
-	hash := sha1.Sum([]byte(password))
-	str := fmt.Sprintf("%x", hash)
-	if str != user.PwdHash {
+	if hashPwd(password) != user.PwdHash {
 		return nil, false
 	}
 	st := session.FromContext(c)
@@ -136,7 +127,7 @@ func (u *User) AutoLogin(c *gin.Context) {
 
 // MarkVisit обновляет поле VisitedAt и сохраняет в базу.
 func (u *User) MarkVisit() {
-	u.UpdatedAt = time.Now()
+	u.VisitedAt = time.Now()
 	models.DB.Save(u)
 }
 
@@ -156,10 +147,7 @@ func (u *User) SetRole(r string) {
 
 // Admin возвращает true, если пользователь относится к администрации.
 func (u *User) Admin() bool {
-	if u.Role == AdminRole {
-		return true
-	}
-	return false
+	return u.Role == AdminRole
 }
 
 // Destroy стирает данные о пользователе из базы данных.
@@ -168,17 +156,15 @@ func (u *User) Destroy() {
 }
 
 // Count возвращает общее количество всех существующих пользователей.
-func Count() int {
-	var count int
-	models.DB.Model(&User{}).Count(&count)
-	return count
+func Count() (n int) {
+	models.DB.Model(&User{}).Count(&n)
+	return
 }
 
 // Pages возвращает количество страниц, на которые мог бы поместиться
 // список всех существующих пользователей по n элементов на страницу.
 func Pages(n int) int {
-	c := Count()
-	return (c-1)/n + 1
+	return (Count()-1)/n + 1
 }
 
 // SortMode определяет режим сортировки выборки пользователей.
@@ -197,10 +183,9 @@ const (
 // FindPage возвращает список пользователей на i-й странице, если бы они
 // размещались по n штук на страницу, отсортированные по sortBy.
 // Отсчет страниц ведется с единицы.
-func FindPage(i, n int, sortBy SortMode) []*User {
-	slice := []*User{}
-	models.DB.Limit(n).Model(&User{}).Offset(n * (i - 1)).Order(string(sortBy)).Find(&slice)
-	return slice
+func FindPage(i, n int, sortBy SortMode) (us []*User) {
+	models.DB.Limit(n).Model(&User{}).Offset(n * (i - 1)).Order(string(sortBy)).Find(&us)
+	return
 }
 
 var initUser = &User{
