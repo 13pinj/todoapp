@@ -199,8 +199,16 @@ func init() {
 }
 
 func initializeUsers() {
-	if !models.DB.HasTable(initUser) {
-		models.DB.CreateTable(initUser).Create(initUser)
+	dummy := &User{}
+	if !models.DB.HasTable(dummy) {
+		err := models.DB.CreateTable(dummy).Error
+		if err != nil {
+			panic(err)
+		}
+		err = models.DB.Create(initUser).Error
+		if err != nil {
+			panic(err)
+		}
 	}
-	models.DB.AutoMigrate(initUser)
+	models.DB.AutoMigrate(dummy)
 }
