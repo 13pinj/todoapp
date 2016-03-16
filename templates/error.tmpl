@@ -1,0 +1,83 @@
+<html>
+  <head>
+    <title>{{.Code}} {{.Msg}} - TodoApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <style>
+    *
+    {
+    	box-sizing: border-box;
+    	margin: 0;
+    	padding: 0;
+    }
+    body
+    {
+    	font-family: 'Roboto', sans-serif;
+    	font-size: 12pt;
+    	background-color: #345579;
+    }
+    #owrap
+    {
+    	position: absolute;
+    	top: 0;
+    	bottom: 0;
+    	left: 50%;
+    	width: 360px;
+    	margin-left: -180px;
+    }
+    #iwrap
+    {
+    	position: absolute;
+    	top: 50%;
+    	width: 100%;
+    	height: 280px;
+    	margin-top: -140px;
+    	padding: 40px;
+    	border-radius: 4px;
+    	background-color: white;
+    	background-color: white;
+    	box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
+    }
+    h1
+    {
+    	font-size: 80pt;
+    	margin-bottom: 24px;
+    	text-align: center;
+    	color: #466c95;
+    }
+    h2
+    {
+    	font-size: 1rem;
+    	text-align: center;
+    	color: #5b80a8;
+    }
+    @media screen and (max-width: 528px)
+    {
+    	body
+    	{
+    		background-color: white;
+    	}
+    	#owrap
+    	{
+    		position: static;
+    		width: 100%;
+    		margin: 0;
+    	}
+    	#iwrap
+    	{
+    		position: static;
+    		margin: 0;
+    		box-shadow: none;
+    	}
+    }
+    </style>
+  </head>
+  <body>
+    <div id="owrap">
+      <div id="iwrap">
+        <h1>{{.Code}}</h1>
+        <h2>{{.Msg}}</h2>
+      </div>
+    </div>
+  </body>
+</html>

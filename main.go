@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/gin-gonic/gin"
+	"github.com/13pinj/todoapp/controllers"
 	"github.com/13pinj/todoapp/controllers/page"
 	"github.com/13pinj/todoapp/controllers/todos"
 	"github.com/13pinj/todoapp/controllers/users"
@@ -16,7 +17,9 @@ func main() {
 	r.Use(gin.RecoveryWithWriter(log.Writer()))
 
 	r.LoadHTMLGlob("templates/*")
+	r.NoRoute(ctl.Render404)
 	r.Static("/s", "public")
+
 	r.GET("/", page.Home)
 
 	r.POST("/login", users.Login)
