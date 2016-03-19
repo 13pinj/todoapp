@@ -54,8 +54,9 @@ func Register(name string, password string) (u *User, errs []error) {
 		return
 	}
 	u = &User{
-		Name:    name,
-		PwdHash: hashPwd(password),
+		Name:      name,
+		PwdHash:   hashPwd(password),
+		VisitedAt: time.Now(),
 	}
 	err := models.DB.Save(u).Error
 	if err != nil {
