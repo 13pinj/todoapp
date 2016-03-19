@@ -2,11 +2,10 @@
 <div class="center-col">
   <div class="panel">
     <div class="clearfix">
-      <h1 class="float-left">TodoApp</h1>
-      <form class="float-right" style="margin-top:5px;" action="/logout" method="post">
-        {{.CurrentUser.Name}}
-        <input class="link" type="submit" name="submit" value="Выход">
-      </form>
+      <a href="/"><h1 class="float-left">TodoApp</h1></a>
+      <div class="float-right" style="margin-top:5px;">
+        {{template "account-header" .}}
+      </div>
     </div>
     <form action="/list-create" method="post">
       <div class="inp-btn-group">

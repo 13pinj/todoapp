@@ -1,0 +1,29 @@
+{{template "header" .}}
+<div class="center-col">
+  <div class="panel">
+    <div class="clearfix">
+      <div class="float-left">
+        <a href="/"><h1>TodoApp</h1></a>
+        <h2>Админская панель</h2>
+      </div>
+      <div class="float-right" style="margin-top:8px;">
+        {{template "account-header" .}}
+      </div>
+    </div>
+
+    <h3>Список пользователей</h3>
+    <ul>
+      {{range .Users}}
+      <li class="list-item">
+        <a href="{{.AdminPath}}">{{.Name}}</a>
+        <span class="user-status {{if .Online}}online{{else}}offline{{end}}">{{if .Online}}онлайн{{else}}оффлайн{{end}}</span>
+        <span class="item-stat">{{$c := .CountLists}}{{$c}} {{rplural $c "список" "списка" "списков"}}</span>
+      </li>
+      {{end}}
+    </ul>
+    <div style="margin-top:12px;">
+      {{template "pager" .Pager}}
+    </div>
+  </div>
+</div>
+{{template "footer" .}}

@@ -42,6 +42,10 @@ h2
 
 	color: #5b80a8;
 }
+h3
+{
+	font-size: 0.75rem;
+}
 form
 {
 	display: block;
@@ -360,6 +364,58 @@ input.transparent
 
 	color: rgba(0, 0, 0, 0.3);
 }
+.pager-wrap
+{
+	text-align: center;
+}
+ul.pager
+{
+	display: inline-block;
+
+	list-style: none;
+}
+ul.pager li
+{
+	display: inline-block;
+}
+ul.pager li a
+{
+	display: block;
+
+	width: 24px;
+	height: 24px;
+	padding: 2px;
+
+	text-align: center;
+
+	border-radius: 1000px;
+}
+ul.pager li a.active
+{
+	font-weight: bold;
+
+	background-color: #cedded;
+}
+
+/*
+* AUTH PAGES (LOG-IN AND REGISTER)
+*/
+.center-col .auth-form
+{
+	position: absolute;
+	top: 50%;
+
+	width: 100%;
+	margin-top: -180px;
+}
+
+/*
+* LISTS INDEX PAGE
+*/
+.list-create-error
+{
+	margin: 4px 0 0 6px;
+}
 
 /*
 * LIST PAGE
@@ -472,6 +528,49 @@ input.transparent
 .todo-item:hover .delete
 {
 	visibility: visible;
+}
+
+/*
+* USERS ADMIN PAGE
+*/
+.user-status
+{
+	font-size: 0.75rem;
+
+	padding: 1px;
+
+	border-radius: 100px;
+}
+.user-status::before
+{
+	display: inline-block;
+	overflow: hidden;
+
+	width: 6px;
+	height: 6px;
+	margin-right: 6px;
+	margin-bottom: 1px;
+
+	content: '';
+
+	color: transparent;
+	border-radius: 3px;
+}
+.user-status.online
+{
+	padding-right: 8px;
+	padding-left: 4px;
+
+	color: #5dae8b;
+	background-color: #cfe8dd;
+}
+.user-status.online::before
+{
+	background-color: #5dae8b;
+}
+.user-status.offline::before
+{
+	display: none;
 }
 
 /*

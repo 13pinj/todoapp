@@ -1,0 +1,24 @@
+<!--
+Pager widget template.
+
+Requires variables:
+* .Cur - current page number
+* .Max - maximum page number
+* .PathTmpl - template url to the current page to be used
+when constructing links. E.g. "/index?page=".
+
+-->
+{{define "pager"}}
+<div class="pager-wrap">
+  <ul class="pager">
+    {{$cur := .Cur}}
+    {{$max := .Max}}
+    {{$pt := .PathTmpl}}
+    {{range (pages $cur $max)}}
+    <li>
+      <a href="{{$pt}}{{.}}" class="{{if eq . $cur}}active{{end}}">{{.}}</a>
+    </li>
+    {{end}}
+  </ul>
+</div>
+{{end}}

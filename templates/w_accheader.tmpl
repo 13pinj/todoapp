@@ -1,0 +1,16 @@
+<!--
+Account header template.
+
+Requires variables:
+* .CurrentUser - current user
+
+-->
+{{define "account-header"}}
+<form action="/logout" method="post">
+  {{.CurrentUser.Name}}
+  {{if .CurrentUser.Admin}}
+    <a href="/admin">Админка</a>
+  {{end}}
+  <input class="link" type="submit" name="submit" value="Выход">
+</form>
+{{end}}

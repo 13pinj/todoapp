@@ -131,6 +131,10 @@ func (u *User) MarkVisit() {
 	models.DB.Save(u)
 }
 
+func (u *User) Online() bool {
+	return time.Now().Sub(u.VisitedAt) < 15*time.Minute
+}
+
 // LoadLists загружает из базы списки дел пользователя в поле Lists
 func (u *User) LoadLists() {
 	if u.Lists != nil {
@@ -148,6 +152,15 @@ func (u *User) SetRole(r string) {
 // Admin возвращает true, если пользователь относится к администрации.
 func (u *User) Admin() bool {
 	return u.Role == AdminRole
+}
+
+func (u *User) AdminPath() string {
+	return fmt.Sprintf("/admin/u/%v", u.Name)
+}
+
+func (u *User) CountLists() (n int) {
+	models.DB.Model(&todolist.TodoList{}).Where("user_id = ?", u.ID).Count(&n)
+	return
 }
 
 // Destroy стирает данные о пользователе из базы данных.
@@ -175,9 +188,11 @@ const (
 	ByID            SortMode = "id"
 	ByName          SortMode = "name"
 	ByCreatedAt     SortMode = "created_at"
+	ByVisitedAt     SortMode = "visited_at, created_at"
 	ByIDDesc        SortMode = "id desc"
 	ByNameDesc      SortMode = "name desc"
 	ByCreatedAtDesc SortMode = "created_at desc"
+	ByVisitedAtDesc SortMode = "visited_at desc, created_at desc"
 )
 
 // FindPage возвращает список пользователей на i-й странице, если бы они
