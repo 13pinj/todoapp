@@ -523,39 +523,54 @@ input.transparent
 /*
 * SECOND VIEW BREAKPOINT: 480 + 24*2 = 528px
 */
-@media screen and (max-width: 528px) {
-	body {
+@media screen and (max-width: 528px)
+{
+	body
+	{
 		background-color: white;
 	}
-	.center-col, .center-col.large {
+	.center-col,
+	.center-col.large
+	{
+		left: 0;
+
 		width: 100%;
 		margin: 0;
-		left: 0;
 	}
-	.center-col .auth-form {
+	.center-col .auth-form
+	{
 		top: 0;
 	}
-	.panel, .center-col .panel {
-		border-radius: 0;
+	.panel,
+	.center-col .panel
+	{
 		margin: 0;
+
+		border-radius: 0;
 		box-shadow: none;
 	}
-	.delete {
+	.delete
+	{
 		font-size: 1rem;
+
 		margin-top: 0;
 	}
 	.todolist-item .delete,
-	.todo-item .delete {
+	.todo-item .delete
+	{
 		visibility: visible;
 	}
-	.todo-item input[type='text'] {
+	.todo-item input[type='text']
+	{
 		width: 60%;
 	}
-	.inp-btn-group input[type='text'] {
+	.inp-btn-group input[type='text']
+	{
 		width: 65%;
 	}
 	.inp-btn-group input[type='submit'],
-	.inp-btn-group button {
+	.inp-btn-group button
+	{
 		width: 35%;
 	}
 }
