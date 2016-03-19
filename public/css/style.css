@@ -364,6 +364,11 @@ input.transparent
 
 	color: rgba(0, 0, 0, 0.3);
 }
+.account-header .account-name,
+.account-header .admin-panel-link
+{
+	margin-right: 4px;
+}
 .pager-wrap
 {
 	text-align: center;
@@ -427,10 +432,6 @@ ul.pager li a.active
 .list-topbar *
 {
 	margin-bottom: 0;
-}
-.list-topbar .vcenter
-{
-	margin-top: 6px;
 }
 .list-topbar h1
 {

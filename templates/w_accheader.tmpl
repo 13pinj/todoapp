@@ -6,11 +6,13 @@ Requires variables:
 
 -->
 {{define "account-header"}}
-<form action="/logout" method="post">
-  {{.CurrentUser.Name}}
-  {{if .CurrentUser.Admin}}
-    <a href="/admin">Админка</a>
-  {{end}}
-  <input class="link" type="submit" name="submit" value="Выход">
-</form>
+<div class="account-header">
+  <form action="/logout" method="post">
+    <span class="account-name">{{.CurrentUser.Name}}</span>
+    {{if .CurrentUser.Admin}}
+      <a class="admin-panel-link" href="/admin">Админка</a>
+    {{end}}
+    <input class="link" type="submit" name="submit" value="Выход">
+  </form>
+</div>
 {{end}}
