@@ -16,7 +16,7 @@
       {{range .Users}}
       <li class="list-item">
         <a href="{{.AdminPath}}">{{.Name}}</a>
-        <span class="user-status {{if .Online}}online{{else}}offline{{end}}">{{if .Online}}онлайн{{else}}оффлайн{{end}}</span>
+        <span class="user-status {{if .Online}}online{{else}}offline{{end}}">{{if .Online}}онлайн{{else}}был {{ago .VisitedAt}}{{end}}</span>
         <span class="item-stat">{{$c := .CountLists}}{{$c}} {{rplural $c "список" "списка" "списков"}}</span>
       </li>
       {{end}}
