@@ -264,60 +264,42 @@ input.transparent
 
 	background: none;
 }
-
-/*
-* AUTH PAGES (LOG-IN AND REGISTER)
-*/
-.center-col .auth-form
-{
-	position: absolute;
-	top: 50%;
-
-	width: 100%;
-	margin-top: -180px;
-}
-
-/*
-* LISTS INDEX PAGE
-*/
-.list-create-error
-{
-	margin: 4px 0 0 6px;
-}
-.todolist-item,
-.no-todolist
+.list-item,
+.no-item
 {
 	padding-top: 14px;
 	padding-bottom: 14px;
 
 	list-style: none;
 }
-.todolist-item
+.list-item
 {
 	padding-left: 6px;
 
 	border-bottom: 1px solid rgba(0,0,0,0.15);
 }
-.no-todolist
+.no-item
 {
 	text-align: center;
 
 	color: rgba(0,0,0,0.4);
 }
-.todolist-item:last-child,
-.no-todolist
+.list-item:last-child,
+.no-item
 {
 	margin-bottom: -12px;
 }
-.todolist-item:last-child
+.list-item:last-child
 {
 	border-bottom: none;
 }
-.todolist-item a
+.list-item a
 {
 	font-weight: bold;
+
+	color: #466c95;
 }
-.todolist-item a::before
+.list-item a::before
 {
 	display: inline-block;
 
@@ -329,53 +311,54 @@ input.transparent
 	content: '';
 
 	border-radius: 2px;
+	background-color: #466c95;
 }
-.todolist-item:nth-child(4n+1) a
+.list-item.colored:nth-child(4n+1) a
 {
 	color: #466c95;
 }
-.todolist-item:nth-child(4n+1) a::before
+.list-item.colored:nth-child(4n+1) a::before
 {
 	background-color: #466c95;
 }
-.todolist-item:nth-child(4n+2) a
+.list-item.colored:nth-child(4n+2) a
 {
 	color: #5dae8b;
 }
-.todolist-item:nth-child(4n+2) a::before
+.list-item.colored:nth-child(4n+2) a::before
 {
 	background-color: #5dae8b;
 }
-.todolist-item:nth-child(4n+3) a
+.list-item.colored:nth-child(4n+3) a
 {
 	color: #c9c639;
 }
-.todolist-item:nth-child(4n+3) a::before
+.list-item.colored:nth-child(4n+3) a::before
 {
 	background-color: #c9c639;
 }
-.todolist-item:nth-child(4n+4) a
+.list-item.colored:nth-child(4n+4) a
 {
 	color: #ff7676;
 }
-.todolist-item:nth-child(4n+4) a::before
+.list-item.colored:nth-child(4n+4) a::before
 {
 	background-color: #ff7676;
 }
-.todolist-item .list-stat
-{
-	font-size: 0.75rem;
-
-	color: rgba(0, 0, 0, 0.3);
-}
-.todolist-item .delete
+.list-item.deletable .delete
 {
 	visibility: hidden;
 	float: right;
 }
-.todolist-item:hover .delete
+.list-item.deletable:hover .delete
 {
 	visibility: visible;
+}
+.list-item .item-stat
+{
+	font-size: 0.75rem;
+
+	color: rgba(0, 0, 0, 0.3);
 }
 
 /*

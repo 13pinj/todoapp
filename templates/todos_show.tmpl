@@ -14,9 +14,9 @@
     <div class="list-sidebar">
       <ul>
         {{range .Lists}}
-        <li class="todolist-item">
+        <li class="colored list-item">
           <a href="{{.Path}}">{{.Title}}</a>
-          <span class="list-stat">{{.LenDone}}/{{.Len}}</span>
+          <span class="item-stat">{{.LenDone}}/{{.Len}}</span>
         </li>
         {{end}}
       </ul>

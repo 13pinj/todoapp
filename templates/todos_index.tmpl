@@ -19,13 +19,13 @@
     </p>
     <ul>
       {{range .Lists}}
-      <li class="todolist todolist-item" data-id="{{.ID}}">
+      <li class="todolist colored deletable list-item" data-id="{{.ID}}">
         <a href="{{.Path}}">{{.Title}}</a>
-        <span class="list-stat">{{.LenDone}}/{{.Len}}</span>
+        <span class="item-stat">{{.LenDone}}/{{.Len}}</span>
         <button type="button" name="button" class="delete">Удалить</button>
       </li>
       {{else}}
-      <li class="no-todolist">
+      <li class="no-item">
         Списков дел нет :(
       </li>
       {{end}}
