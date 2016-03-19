@@ -7,6 +7,7 @@ import (
 	"net/url"
 
 	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/gin-gonic/gin"
+	"github.com/13pinj/todoapp/templates"
 )
 
 // Server - структура тестового сервера.
@@ -27,7 +28,7 @@ func NewServer(fn gin.HandlerFunc) *Server {
 	gin.SetMode(gin.TestMode)
 
 	r := gin.New()
-	r.LoadHTMLGlob("../../templates/*")
+	r.SetHTMLTemplate(tmpl.MustLoad("../../templates/*"))
 	r.GET(testURL, fn)
 	r.POST(testURL, fn)
 

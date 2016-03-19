@@ -1,7 +1,6 @@
 package main
 
 import (
-	"html/template"
 	"os"
 
 	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/gin-gonic/gin"
@@ -19,11 +18,7 @@ func main() {
 	r.Use(gin.LoggerWithWriter(log.Writer()))
 	r.Use(gin.RecoveryWithWriter(log.Writer()))
 
-	tmpl, err := template.New("").Funcs(tmpl.Funcs()).ParseGlob("templates/*")
-	if err != nil {
-		panic(err)
-	}
-	r.SetHTMLTemplate(tmpl)
+	r.SetHTMLTemplate(tmpl.MustLoad("templates/*"))
 
 	r.NoRoute(ctl.Render404)
 	r.Static("/s", "public")

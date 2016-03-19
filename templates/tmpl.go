@@ -66,6 +66,12 @@ func ago(t time.Time) string {
 	}
 }
 
-func Funcs() template.FuncMap {
-	return fm
+// MustLoad загружает шаблоны из пути, внедряя в них свой набор функций.
+// Паникует при возникновении любой ошибки.
+func MustLoad(path string) *template.Template {
+	t, err := template.New("").Funcs(fm).ParseGlob(path)
+	if err != nil {
+		panic(err)
+	}
+	return t
 }
