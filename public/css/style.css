@@ -513,7 +513,8 @@ ul.pager li a.active
 
 	color: rgba(0,0,0,0.7);
 }
-.todo-item input[type='checkbox']:checked ~ input[type='text']
+.todo-item input[type='checkbox']:checked ~ input[type='text'],
+.todo-item input[type='checkbox']:checked ~ label
 {
 	text-decoration: line-through;
 
