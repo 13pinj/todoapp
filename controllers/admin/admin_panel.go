@@ -39,9 +39,18 @@ func User(c *gin.Context) {
 	if !assertAccess(c) {
 		return
 	}
+	u, ok := user.Find(c.Param("name"))
+	if !ok {
+		ctl.Render404(c)
+		return
+	}
+	u.LoadLists()
+	for _, i := range u.Lists {
+		i.LoadTodos()
+	}
 	// Шаблон ожидает заполненую структуру пользователя
 	ctl.RenderHTML(c, "admin_user.tmpl", gin.H{
-		"User": &user.User{},
+		"User": u,
 	})
 }
 
