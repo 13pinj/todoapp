@@ -233,9 +233,11 @@ func initializeUsers() {
 	// Миграция для БД, заполненных до введения колонки visited_at.
 	// TODO: применить один sql-запрос? Но он должен поддерживать как минимум
 	// sqlite и pg одновременно.
-	var vanulls []*User
-	models.DB.Where("visited_at IS NULL OR visited_at = ''").Find(&vanulls)
-	for _, u := range vanulls {
+	var vanulls_lite []*User
+	var vanulls_pq []*User
+	models.DB.Where("visited_at IS NULL").Find(&vanulls_pq)
+	models.DB.Where("visited_at = ''").Find(&vanulls_lite)
+	for _, u := range append(vanulls_lite, vanulls_pq...) {
 		log.Printf(
 			"Updating user with visited_at=NULL: (%v, %v, c_at: %v, v_at: %v)",
 			u.ID, u.Name, u.CreatedAt, u.VisitedAt,
