@@ -4,6 +4,7 @@ import (
 	"crypto/sha1"
 	"errors"
 	"fmt"
+	"log"
 	"strings"
 	"time"
 
@@ -227,4 +228,19 @@ func initializeUsers() {
 		}
 	}
 	models.DB.AutoMigrate(dummy)
+
+	// Приравнять нулевые visited_at к created_at.
+	// Миграция для БД, заполненных до введения колонки visited_at.
+	// TODO: применить один sql-запрос? Но он должен поддерживать как минимум
+	// sqlite и pg одновременно.
+	var vanulls []*User
+	models.DB.Where("visited_at IS NULL OR visited_at = ''").Find(&vanulls)
+	for _, u := range vanulls {
+		log.Printf(
+			"Updating user with visited_at=NULL: (%v, %v, c_at: %v, v_at: %v)",
+			u.ID, u.Name, u.CreatedAt, u.VisitedAt,
+		)
+		u.VisitedAt = u.CreatedAt
+		models.DB.Save(u)
+	}
 }
