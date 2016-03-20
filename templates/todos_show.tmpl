@@ -22,7 +22,7 @@
       <p class="error" id="error-alert" >
         {{if .AlertError}}{{.AlertError}}{{end}}
       </p>
-      <ul>
+      <ul style="margin-bottom:18px;">
         {{range .List.Todos}}
         <li class="todo todo-item" data-id="{{.ID}}">
           <input type="checkbox" name="done" {{if .Done}}checked{{end}}>

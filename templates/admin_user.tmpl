@@ -1,0 +1,42 @@
+{{template "header" .}}
+<div class="center-col">
+  <div class="panel">
+    <div class="clearfix">
+      <div class="float-left">
+        <a href="/"><h1>TodoApp</h1></a>
+      </div>
+      <div class="float-right" style="margin-top:7px;">
+        {{template "account-header" .}}
+      </div>
+    </div>
+    <a href="/admin"><h2>Админская панель</h2></a>
+
+    <h3>Пользователь {{.User.Name}}</h3>
+
+    <ul>
+      {{range .User.Lists}}
+      <li class="list-item">
+        <b>{{.Title}}</b>
+        <span class="item-stat">{{.LenDone}}/{{.LenUndone}}</span>
+        <ul style="margin-top:6px;">
+          {{range .Todos}}
+          <li class="todo-item">
+            <input type="checkbox" disabled{{if .Done}} checked{{end}}>
+            <label>{{.Label}}</label>
+          </li>
+          {{else}}
+          <li class="no-todo">
+            Пусто
+          </li>
+          {{end}}
+        </ul>
+      </li>
+      {{else}}
+      <li class="no-item">
+        Нет списков
+      </li>
+      {{end}}
+    </ul>
+  </div>
+</div>
+{{template "footer" .}}

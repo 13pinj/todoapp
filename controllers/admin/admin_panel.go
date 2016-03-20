@@ -38,8 +38,11 @@ func Index(c *gin.Context) {
 func User(c *gin.Context) {
 	if !assertAccess(c) {
 		return
-
 	}
+	// Шаблон ожидает заполненую структуру пользователя
+	ctl.RenderHTML(c, "admin_user.tmpl", gin.H{
+		"User": &user.User{},
+	})
 }
 
 // UserUpdate обновляет информацию о пользователе.

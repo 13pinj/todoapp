@@ -479,18 +479,13 @@ ul.pager li a.active
 .todo-item,
 .no-todo
 {
-	padding: 6px 6px;
+	padding: 6px;
 
 	list-style: none;
 }
-.todo-item:last-child,
 .no-todo
 {
-	margin-bottom: 18px;
-}
-.no-todo
-{
-	padding: 24px;
+	padding: 12px;
 
 	text-align: center;
 
@@ -507,7 +502,8 @@ ul.pager li a.active
 	height: auto;
 	margin: 6px;
 }
-.todo-item input[type='text']
+.todo-item input[type='text'],
+.todo-item label
 {
 	float: left;
 
