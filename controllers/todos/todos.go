@@ -1,6 +1,7 @@
 package todos
 
 import (
+	"math/rand"
 	"net/http"
 	"strconv"
 
@@ -21,8 +22,20 @@ func Index(c *gin.Context) {
 		return
 	}
 	u.LoadLists()
+
+	// Примеры заголовков списков, для вставки
+	// в плейсхолдер поля ввода заголовка.
+	pholders := []string{
+		"Список покупок",
+		"Дела на завтра",
+		"Что посмотреть",
+		"Задание на дом",
+	}
+	ph := pholders[rand.Intn(len(pholders))]
+
 	ctl.RenderHTML(c, "todos_index.tmpl", gin.H{
-		"Lists": u.Lists,
+		"Lists":            u.Lists,
+		"TitlePlaceholder": ph,
 	})
 }
 
