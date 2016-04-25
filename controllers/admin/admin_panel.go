@@ -5,6 +5,9 @@ import (
 
 	"github.com/13pinj/todoapp/Godeps/_workspace/src/github.com/gin-gonic/gin"
 	"github.com/13pinj/todoapp/controllers"
+	"github.com/13pinj/todoapp/models"
+	"github.com/13pinj/todoapp/models/todo"
+	"github.com/13pinj/todoapp/models/todolist"
 	"github.com/13pinj/todoapp/models/user"
 )
 
@@ -73,4 +76,18 @@ func assertAccess(c *gin.Context) bool {
 		return false
 	}
 	return true
+}
+
+// TrashStatus - подсчитывает число удаленных записей
+func TrashStatus() (notdel int, del int) {
+	var buff int
+	models.DB.Model(&todo.Todo{}).Where("deleted_at IS NULL").Count(&notdel)
+	buff = notdel
+	models.DB.Model(&todolist.TodoList{}).Where("deleted_at IS NULL").Count(&notdel)
+	notdel += buff
+	models.DB.Model(&todo.Todo{}).Where("deleted_at IS NOT NULL").Count(&del)
+	buff = del
+	models.DB.Model(&todolist.TodoList{}).Where("deleted_at IS NOT NULL").Count(&del)
+	del += buff
+	return
 }
